@@ -1,0 +1,12 @@
+#buttons {
+	height: 400px;
+	width: 200px;
+	margin: auto;
+	text-align: center;
+	font-size:40px;
+	font-family:Arial;
+}
+a {
+    color:white;
+    text-decoration:none;
+}
