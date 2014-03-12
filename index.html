@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel='stylesheet' href='SignIn.css'/>
+	<script src='script.js'></script>
+</head>
+<title>Sign in page</title>
+<body style="background:black">
+    <div id="top" style="width=100%; text-align:center">
+        <img src="http://i.imgur.com/ASTbZIp.png">
+    </div>
+    <div id="buttons">
+        <p style="color:white">Log In</p>
+		<form action="validate_login.php" method="post">
+			<label for="Username">Username: </label> <input type="text" name="Username" id="Username" maxlength="15">
+			<label for="Password">Password: </label> <input type="password" name="Password" id="Password">
+			<button type="Submit" name="Login">Login</button>
+			<p id="Error"></p>
+		</form>
+        <a href="www.reddit.com">Sign Up</a>
+    </div>
+
+</body>
+</html>
