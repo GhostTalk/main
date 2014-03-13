@@ -5,6 +5,8 @@
 	text-align: center;
 	font-size:40px;
 	font-family:Arial;
+	border: 2px solid white;
+	background-color:grey;
 }
 a {
     color:white;
