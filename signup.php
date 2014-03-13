@@ -11,12 +11,6 @@
 		<form>
 		  <fieldset>
 			<legend>Create an account</legend>
-			Firstname
-			<input type="text" name="firstname"/>
-			<br>
-			Last name 
-			<input type="text" name="lastname"/>
-			<br>
 			Choose your username 
 			<input type="text" name="username"/>
 			<br>
@@ -25,6 +19,15 @@
 			<br>
 			Confirm your password
 			<input type="text" name="password"/>
+			<br>
+			Firstname
+			<input type="text" name="firstname"/>
+			<br>
+			Last name 
+			<input type="text" name="lastname"/>
+			<br>
+			Email
+			<input type="text" name="email"/>
 			<br>
 			Birthday
 			<input type="text" name="birthday"/>
