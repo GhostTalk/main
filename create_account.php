@@ -45,8 +45,18 @@
 			header('Location = http://cise.ufl.edu/~cmoore/');
 		else{
 			if(pg_connection_status($conn) === PGSQL_CONNECTION_BAD){
+				$deleteacc = sprintf("DELETE FROM GTUser WHERE username='%s'",
+					pg_escape_string($_POST['Username']));
+				
+				pg_query($conn, $deleteacc);
+				
 				header('Location = http://cise.ufl.edu/~cmoore/signup.php?error=connection');
 			} else {
+				$deleteacc = sprintf("DELETE FROM GTUser WHERE username='%s'",
+					pg_escape_string($_POST['Username']));
+				
+				pg_query($conn, $deleteacc);
+				
 				header('Location = http://cise.ufl.edu/~cmoore/signup.php?error=' . pg_result_status($result, PGSQL_STATUS_STRING)); 
 			}	
 		}
