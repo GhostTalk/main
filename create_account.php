@@ -12,7 +12,7 @@
 	$salt = '$6$rounds=5000'.$str; 
 	$password = crypt($_POST['Password'], salt);
 	
-	$createuser = sprintf("INSERT INTO GTUser(username, password, firstName, lastName, email, currentCity, gender, age) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%i')",
+	$createuser = sprintf("INSERT INTO GTUser(username, password, firstName, lastName, email, currentCity, gender, age) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%i');",
 		pg_escape_string($_POST['Username']),
 		pg_escape_string($password),
 		pg_escape_string($_POST['first']),
@@ -27,21 +27,29 @@
 	$result = pg_query($conn, $createuser);
 	
 	if($result) {
-		$groupsview = sprintf("CREATE MATERIALIZED VIEW %s_groups AS SELECT memberUsername FROM Groups WHERE '%s'=creatorUsername",
+		$createviews = sprintf("CREATE MATERIALIZED VIEW %s_groups AS SELECT memberUsername FROM Groups WHERE '%s'=creatorUsername; CREATE VIEW %s_received_view AS SELECT senderUsername, postTime, expirationTime, body FROM Posts WHERE receiverUsername = '%s'; CREATE VIEW %s_requests_view AS SELECT name, username FROM GTUser JOIN Requests ON senderUsername=username WHERE receiverUsername = '%s'; CREATE VIEW %s_sent_requests AS SELECT name, username FROM GTUser JOIN Requests ON receiverUsername=username WHERE senderUsername='%s'; CREATE VIEW %s_sent_view AS SELECT receiverUsername, postTime, expirationTime, body FROM Posts WHERE senderUsername = '%s';",
+			pg_escape_string($_POST['Username']),
+			pg_escape_string($_POST['Username']),
+			pg_escape_string($_POST['Username']),
+			pg_escape_string($_POST['Username']),
+			pg_escape_string($_POST['Username']),
+			pg_escape_string($_POST['Username']),
+			pg_escape_string($_POST['Username']),
+			pg_escape_string($_POST['Username']),
 			pg_escape_string($_POST['Username']),
 			pg_escape_string($_POST['Username']));
-		$rpview = sprintf("CREATE VIEW %s_received_view AS SELECT senderUsername, postTime, expirationTime, body FROM Posts WHERE receiverUsername = '%s'",
-			pg_escape_string($_POST['Username']),
-			pg_escape_string($_POST['Username']));
-		$spview = sprintf("CREATE VIEW %s_requests_view AS ELECT name, username FROM GTUser JOIN Requests ON senderUsername=username WHERE receiverUsername = '%s'",
-			pg_escape_string($_POST['Username']),
-			pg_escape_string($_POST['Username']));
-		$rrview = sprintf("CREATE VIEW %s_sent_requests AS SELECT name, username FROM GTUser JOIN Requests ON receiverUsername=username WHERE senderUsername='%s'",
-			pg_escape_string($_POST['Username']),
-			pg_escape_string($_POST['Username']));
-		%srview = sprintf("CREATE VIEW %s_sent_view AS SELECT receiverUsername, postTime, expirationTime, body FROM Posts WHERE senderUsername = '%s'",
-			pg_escape_string($_POST['Username']),
-			pg_escape_string($_POST['Username']);
+			
+		$result = pg_query($conn, $createviews);
+		
+		if($result)
+			header('Location = http://cise.ufl.edu/~cmoore/');
+		else{
+			if(pg_connection_status($conn) === PGSQL_CONNECTION_BAD){
+				header('Location = http://cise.ufl.edu/~cmoore/signup.php?error=connection');
+			} else {
+				header('Location = http://cise.ufl.edu/~cmoore/signup.php?error=' . pg_result_status($result, PGSQL_STATUS_STRING)); 
+			}	
+		}
 	}
 	else {
 		if(pg_connection_status($conn) === PGSQL_CONNECTION_BAD){
