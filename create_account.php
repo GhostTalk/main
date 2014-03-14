@@ -12,6 +12,10 @@
 	$salt = '$6$rounds=5000'.$str; 
 	$password = crypt($_POST['Password'], salt);
 	
+	if(!ctype_alnum($_POST['Username'])) {
+		header('Location = http://cise.ufl.edu/~cmoore/signup.php?error=badusername');
+	}
+	
 	$createuser = sprintf("INSERT INTO GTUser(username, password, firstName, lastName, email, currentCity, gender, age) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%i');",
 		pg_escape_string($_POST['Username']),
 		pg_escape_string($password),
