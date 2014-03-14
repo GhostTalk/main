@@ -12,7 +12,7 @@
 	$salt = '$6$rounds=5000'.$str; 
 	$password = crypt($_POST['Password'], salt);
 	
-	$query = sprintf("INSERT INTO GTUser(username, password, firstName, lastName, email, currentCity, gender, age) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%i')",
+	$createuser = sprintf("INSERT INTO GTUser(username, password, firstName, lastName, email, currentCity, gender, age) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%i')",
 		pg_escape_string($_POST['Username']),
 		pg_escape_string($password),
 		pg_escape_string($_POST['first']),
@@ -20,12 +20,29 @@
 		pg_escape_string($_POST['email']),
 		pg_escape_string($_POST['city']),
 		pg_escape_string($_POST['gender']),
-		$_POST['age']);		
+		$_POST['age']);
+	
 	$conn = pg_connect('host=postgres.cise.ufl.edu username=cmoore password=calvin#1 dbname=ghosttalk');
 	
-	$result = pg_query($conn, $query);
+	$result = pg_query($conn, $createuser);
 	
-	if($result)
+	if($result) {
+		$groupsview = sprintf("CREATE MATERIALIZED VIEW %s_groups AS SELECT memberUsername FROM Groups WHERE '%s'=creatorUsername",
+			pg_escape_string($_POST['Username']),
+			pg_escape_string($_POST['Username']));
+		$rpview = sprintf("CREATE VIEW %s_received_view AS SELECT senderUsername, postTime, expirationTime, body FROM Posts WHERE receiverUsername = '%s'",
+			pg_escape_string($_POST['Username']),
+			pg_escape_string($_POST['Username']));
+		$spview = sprintf("CREATE VIEW %s_requests_view AS ELECT name, username FROM GTUser JOIN Requests ON senderUsername=username WHERE receiverUsername = '%s'",
+			pg_escape_string($_POST['Username']),
+			pg_escape_string($_POST['Username']));
+		$rrview = sprintf("CREATE VIEW %s_sent_requests AS SELECT name, username FROM GTUser JOIN Requests ON receiverUsername=username WHERE senderUsername='%s'",
+			pg_escape_string($_POST['Username']),
+			pg_escape_string($_POST['Username']));
+		%srview = sprintf("CREATE VIEW %s_sent_view AS SELECT receiverUsername, postTime, expirationTime, body FROM Posts WHERE senderUsername = '%s'",
+			pg_escape_string($_POST['Username']),
+			pg_escape_string($_POST['Username']);
+	}
 	else {
 		if(pg_connection_status($conn) === PGSQL_CONNECTION_BAD){
 			header('Location = http://cise.ufl.edu/~cmoore/signup.php?error=connection');
