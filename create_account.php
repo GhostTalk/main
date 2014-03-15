@@ -61,7 +61,7 @@
 				
 				pg_query($conn, $deleteacc);
 				
-				header('Location = http://cise.ufl.edu/~cmoore/signup.php?error=' . pg_result_status($result, PGSQL_STATUS_STRING)); 
+				header('Location = http://cise.ufl.edu/~cmoore/signup.php?error=' . pg_result_status($result)); 
 			}	
 		}
 	}
@@ -69,7 +69,7 @@
 		if(pg_connection_status($conn) === PGSQL_CONNECTION_BAD){
 			header('Location = http://cise.ufl.edu/~cmoore/signup.php?error=connection');
 		} else {
-			header('Location = http://cise.ufl.edu/~cmoore/signup.php?error=' . pg_result_status($result, PGSQL_STATUS_STRING)); 
+			header('Location = http://cise.ufl.edu/~cmoore/signup.php?error=' . pg_result_status($result)); 
 		}
 	}
 ?>

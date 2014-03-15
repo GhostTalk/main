@@ -7,6 +7,14 @@
 		</title>
 	</head>
 	<body>
+		<?php
+			if($_GET['error']) {
+				if($_GET['error'] === 'connection')
+					echo "<p>There was an error connecting to the server.  Please try again.</p>";
+				else
+					echo "<p>Could not create user account.  Error: " . $_GET['error'] . "</p>";
+			}
+		?>
 		<div class = "formstyle">
 		<form>
 		  <fieldset>
