@@ -16,7 +16,7 @@
 			}
 		?>
 		<div class = "formstyle">
-		<form>
+		<form action="create_account.php" method="post">
 		  <fieldset>
 			<legend>Create an account</legend>
 			Choose your username 
