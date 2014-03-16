@@ -1,0 +1,28 @@
+#required {
+    border:1px solid;
+    height:300px;
+    margin:auto;
+    width:1200px;
+    margin-top:50px;
+    background-color:#3399FF;
+}
+#notrequired {
+    border:1px solid;
+    height:300px;
+    margin:auto;
+    width:1200px;
+    margin-top:5px;
+    background-color:#3366CC;
+}
+td { 
+    font-family:Arial;
+    font-size:20px;
+    color:white;
+}
+table {
+    margin:auto;
+    border:1px solid;
+}
+body {
+    background-color:#333399
+}
