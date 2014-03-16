@@ -1,10 +1,13 @@
 #header {
     top:10px;
     position:relative;
+    margin-left:20px;
     border:2px solid;
 }
 h2 { 
-    margin-left: 450px;
+    text-align:center;
+    font-family:Arial;
+    color:#C0C0C0;
 }
 #left {
     margin-left: 20px;
@@ -14,15 +17,18 @@ h2 {
 table {
     border:2px solid;
     height:100px;
+    width:250px;
     
 }
 td {
-    border:1px solid;
+    border:1px solid black;
+    color:#C0C0C0;
 }
 ul{
 	list-style-type: none;
-	position: relative;
-	margin-top:-30;
+	position: fixed;
+	margin-top:-30px;
+	margin-left:10px;
 }
 
 li {
@@ -31,10 +37,13 @@ li {
 	font-family: Futura, Tahoma, sans-serif;
 	padding: 5px;
 	border-radius: 5px 5px;
-	background-color:
+	color:#C0C0C0;
 }
 #right {
     border:2px solid;
     height:600px;
-    margin-left:101
+    margin-left:268;
+}
+body {
+    background-color:#000080
 }
