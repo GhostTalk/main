@@ -2,7 +2,17 @@
 <html>
 <head>
 	<link rel='stylesheet' href='SignIn.css'/>
-	<script src='script.js'></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script>
+$(document).ready(function(){
+  $(".btn1").click(function(){
+    $(".btn1").fadeOut()
+  });
+  $(".btn1").click(function(){
+    $("form").fadeIn(4500);
+  });
+});
+</script>
 </head>
 <title>Sign in page</title>
 <body style="background:black">
@@ -10,15 +20,22 @@
         <img src="http://i.imgur.com/ASTbZIp.png">
     </div>
     <div id="buttons">
-        <p style="color:white">Log In</p>
-		<form action="validate_login.php" method="post">
-			<label for="Username">Username: </label> <input type="text" name="Username" id="Username" maxlength="15">
-			<label for="Password">Password: </label> <input type="password" name="Password" id="Password">
-			<button type="Submit" name="Login">Login</button>
-			<p id="Error"></p>
-		</form>
+    	<div id="signup">
         <a href="www.reddit.com">Sign Up</a>
+        </div>
+        <div id="login">
+            <div id="butt">
+                <a href="#" class="btn1">Log In</a>
+		    </div>
+		    <form action="validate_login.php" method="post" style="display:none">
+			    <label for="Username" style="color:white">Username: </label> <input type="text" name="Username" id="Username" maxlength="15">
+			<label for="Password" style="color:white">Password: </label> <input type="password" name="Password" id="Password">
+			<button type="Submit" name="Login">Login</button>
+			</div>
+		</form>
+
     </div>
+    
 
 </body>
 </html>

@@ -1,6 +1,6 @@
 #!/usr/local/bin/php
 
-<? php
+<?php
 	$validChars = array('0','1','2', '3', '4', '5', '6', '7', '8', '9','?','-','_', '/', '%','<', '>', ',', '.', '|', '[', ']', '{', '}', '`', '~', '!', '@', '#', '$', '^', '&', '*', '(', ')', 'A',  'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z');
 	$validCharsCount = count($validChars);
 
@@ -19,11 +19,11 @@
 	$createuser = sprintf("INSERT INTO GTUser(username, password, firstName, lastName, email, currentCity, gender, age) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%i');",
 		pg_escape_string($_POST['Username']),
 		pg_escape_string($password),
-		pg_escape_string($_POST['first']),
-		pg_escape_string($_POST['last']),
-		pg_escape_string($_POST['email']),
-		pg_escape_string($_POST['city']),
-		pg_escape_string($_POST['gender']),
+		pg_escape_string($_POST['First']),
+		pg_escape_string($_POST['Last']),
+		pg_escape_string($_POST['Email']),
+		pg_escape_string($_POST['City']),
+		pg_escape_string($_POST['Gender']),
 		$_POST['age']);
 	
 	$conn = pg_connect('host=postgres.cise.ufl.edu username=cmoore password=calvin#1 dbname=ghosttalk');

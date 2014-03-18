@@ -1,56 +1,81 @@
-<!DOCTYPE html>
+#!/usr/local/bin/php
+
+<!DOCTYPE HTML>
 <html>
 	<head>
-		<link type="text/css" rel="stylesheet" href="stylesheet.css"/>
-		<title>
-			GhostTalk
-		</title>
+		<link rel='stylesheet' href='SignUp.css'/>
+		<script src='script.js'></script>
+		<title>Sign Up for GhostTalk</title>
 	</head>
 	<body>
 		<?php
-			if($_GET['error']) {
+			if(isset($_GET['error'])) {
 				if($_GET['error'] === 'connection')
 					echo "<p>There was an error connecting to the server.  Please try again.</p>";
 				else
-					echo "<p>Could not create user account.  Error: " . $_GET['error'] . "</p>";
+					echo "<p>Could not create user account.<br>Error: ".$_GET['error']."</p><p>Please try again.</p>";
 			}
 		?>
-		<div class = "formstyle">
-		<form action="create_account.php" method="post">
-		  <fieldset>
-			<legend>Create an account</legend>
-			Choose your username 
-			<input type="text" name="username"/>
-			<br>
-			Create a password 
-			<input type="text" name="password"/>
-			<br>
-			Confirm your password
-			<input type="text" name="password"/>
-			<br>
-			Firstname
-			<input type="text" name="firstname"/>
-			<br>
-			Last name 
-			<input type="text" name="lastname"/>
-			<br>
-			Email
-			<input type="text" name="email"/>
-			<br>
-			Birthday
-			<input type="text" name="birthday"/>
-			<br>
-			City
-			<input type="text" name="city"/>
-			<br>
-			Male
-			<input type="radio" name="gender" value="Male"/> 
-			Female
-			<input type="radio" name="gender" value="Female"/>
-			<br>
-			<input type="submit" value="Submit"/>
-		   </fieldset>
-		</form> 
+		<form action="create_accounttest.php" method="post">
+		<div id = "required">
+			<table>
+				<tr>
+					<td>
+						<label for="Username">Username: </label> <input type="text" name="Username" id="Username" maxlength="15">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="Password">Password: </label> <input type="password" name="Password" id="Password">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="RPassword">Retype Password: </label> <input type="password" name="RPassword" id="RPassword">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="Email">Email: </label> <input type="Email" name="Email" id="Email">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="First">First Name: </label> <input type="text" name="First" id="First">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="Last">Last Name: </label> <input type="text" name="Last" id="Last">
+					</td>
+				</tr>
+			</table>
 		</div>
+		<div id = "notrequired">
+			<table>
+				<tr>
+					<td>
+						<label for="City">In what city are you currently living? </label><input type="text" name="City" id="City">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="Bday">When were you born?</label> <input type="text" name="First" id="First">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<!---Sex--->
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<!---Picture--->
+					</td>
+				</tr>
+			</table>
+			<button type="Submit" name="Submit">Submit</button>
+		</div>
+		</form>
 	</body>
-<html>
+</html>
