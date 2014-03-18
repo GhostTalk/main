@@ -4,7 +4,6 @@
     margin:auto;
     width:1200px;
     margin-top:50px;
-    background-color:#3399FF;
 }
 #notrequired {
     border:1px solid;
@@ -12,17 +11,22 @@
     margin:auto;
     width:1200px;
     margin-top:5px;
-    background-color:#3366CC;
 }
 td { 
     font-family:Arial;
     font-size:20px;
     color:white;
 }
+button {
+    margin-left:50%;
+}
 table {
     margin:auto;
     border:1px solid;
 }
 body {
-    background-color:#333399
+    background: -webkit-radial-gradient(red, green, blue); /* Safari 5.1 to 6.0 */
+background: -o-radial-gradient(red, green, blue); /* For Opera 11.6 to 12.0 */
+background: -moz-radial-gradient(red, green, blue); /* For Firefox 3.6 to 15 */
+background: radial-gradient(f2f2f2, black, black); /* Standard syntax (must be last) */
 }
