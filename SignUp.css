@@ -3,14 +3,21 @@
     height:300px;
     margin:auto;
     width:1200px;
-    margin-top:50px;
+    background-color:gray;   
 }
 #notrequired {
     border:1px solid;
-    height:300px;
+    height:100%;
     margin:auto;
     width:1200px;
     margin-top:5px;
+    background-color:gray;
+}
+body { 
+	background: -webkit-radial-gradient(100% 100%, farthest-corner, #f2f2f2, black, black); /* Safari 5.1 to 6.0 */
+	background: -o-radial-gradient(100% 100%, farthest-corner, #f2f2f2, black, black); /* For Opera 11.6 to 12.0 */
+	background: -moz-radial-gradient(100% 100%, farthest-corner, #f2f2f2, black, black); /* For Firefox 3.6 to 15 */
+	background: radial-gradient(100% 100%, farthest-corner, #f2f2f2, black, black); /* Standard syntax (must be last) */
 }
 td { 
     font-family:Arial;
@@ -24,9 +31,4 @@ table {
     margin:auto;
     border:1px solid;
 }
-body {
-    background: -webkit-radial-gradient(red, green, blue); /* Safari 5.1 to 6.0 */
-background: -o-radial-gradient(red, green, blue); /* For Opera 11.6 to 12.0 */
-background: -moz-radial-gradient(red, green, blue); /* For Firefox 3.6 to 15 */
-background: radial-gradient(f2f2f2, black, black); /* Standard syntax (must be last) */
-}
+
