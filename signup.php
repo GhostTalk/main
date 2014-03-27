@@ -3,7 +3,7 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<link rel='stylesheet' href='SignUp.css'/>
+		<link rel='stylesheet' href='style.css'/>
 		<script src='script.js'></script>
 		<title>Sign Up for GhostTalk</title>
 	</head>
@@ -18,6 +18,7 @@
 		?>
 		<form action="create_accounttest.php" method="post">
 		<div id = "required">
+		<fieldset>
 			<table>
 				<tr>
 					<td>
@@ -50,8 +51,10 @@
 					</td>
 				</tr>
 			</table>
+			</fieldset>
 		</div>
 		<div id = "notrequired">
+		<fieldset>
 			<table>
 				<tr>
 					<td>
@@ -74,6 +77,7 @@
 					</td>
 				</tr>
 			</table>
+			</fieldset>
 			<button type="Submit" name="Submit">Submit</button>
 		</div>
 		</form>
