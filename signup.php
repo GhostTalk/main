@@ -50,6 +50,11 @@
 						<label for="Last">Last Name: </label> <input type="text" name="Last" id="Last">
 					</td>
 				</tr>
+				<tr>
+					<td>
+						<label for="Birthday">Last Name: </label> <input type="text" name="Birthday" id="Birthday">
+					</td>
+				</tr>
 			</table>
 			</fieldset>
 		</div>
