@@ -62,12 +62,7 @@
 			<table>
 				<tr>
 					<td>
-						<label for="City">In what city are you currently living? </label><input type="text" name="City" id="City">
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<label for="Bday">When were you born?</label> <input type="text" name="First" id="First">
+						<label for="City">Current City: </label><input type="text" name="City" id="City">
 					</td>
 				</tr>
 				<tr>
