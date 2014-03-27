@@ -3,7 +3,7 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<link rel='stylesheet' href='style.css'/>
+		<link rel='stylesheet' href='SignUp.css'/>
 		<script src='script.js'></script>
 		<title>Sign Up for GhostTalk</title>
 	</head>
