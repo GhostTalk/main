@@ -52,7 +52,7 @@
 				</tr>
 				<tr>
 					<td>
-						<label for="Birthday">Last Name: </label> <input type="text" name="Birthday" id="Birthday">
+						<label for="Birthday">Birthday: </label> <input type="text" name="Birthday" id="Birthday">
 					</td>
 				</tr>
 			</table>
