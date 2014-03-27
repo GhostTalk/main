@@ -59,7 +59,6 @@
 			</fieldset>
 		</div>
 		<div id = "notrequired">
-		<fieldset>
 			<table>
 				<tr>
 					<td>
@@ -82,7 +81,6 @@
 					</td>
 				</tr>
 			</table>
-			</fieldset>
 			<button type="Submit" name="Submit">Submit</button>
 		</div>
 		</form>
