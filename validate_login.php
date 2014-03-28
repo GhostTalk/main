@@ -7,8 +7,12 @@
 		pg_escape_string($_POST['Username']));
 	$result = pg_fetch_assoc(pg_query($conn, $query));
 	if($result && crypt($_POST['Password'], $result['password']) == $result['password']) {
-		header('Location: http://www.google.com/');
+		session_start();
+		$_SESSION['Username'] = $_POST['Username'];
+		header('Location: http://cise.ufl.edu/~cmoore/Homepage.html');
+		exit();
 	} else {
 		header('Location: http://cise.ufl.edu/~cmoore');
+		exit();
 	}
 ?>

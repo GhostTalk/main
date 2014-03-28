@@ -1,3 +1,12 @@
+#!/usr/local/bin/php
+
+<?php
+	session_start();
+	if(!isset($_SESSION['Username']))
+		header('Location: http://cise.ufl.edu/~cmoore');
+		exit();
+?>
+
 <!DOCTYPE html>
 <html>
 <head>

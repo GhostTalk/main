@@ -20,25 +20,27 @@
 		header('Location: http://cise.ufl.edu/~cmoore/signup.php?error=badusername');
 		exit();
 	}
-	
-	/**
-	$createuser = sprintf("INSERT INTO GTUser(username, password, firstName, lastName, email, currentCity, gender, age) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%i');",
-		pg_escape_string($_POST['Username']),
-		pg_escape_string($password),
-		pg_escape_string($_POST['First']),
-		pg_escape_string($_POST['Last']),
-		pg_escape_string($_POST['Email']),
-		pg_escape_string($_POST['City']),
-		pg_escape_string($_POST['Gender']),
-		$_POST['age']);
-	**/
 
-	$createuser = sprintf("INSERT INTO GTUser(username, password, firstName, lastName, email) VALUES ('%s', '%s', '%s', '%s', '%s');",
-		pg_escape_string($_POST['Username']),
-		pg_escape_string($password),
-		pg_escape_string($_POST['First']),
-		pg_escape_string($_POST['Last']),
-		pg_escape_string($_POST['Email']));
+	if(!isset($_POST['City'])) {
+		$createuser = sprintf("INSERT INTO GTUser(username, password, firstName, lastName, email, gender, bdate) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s');",
+			pg_escape_string($_POST['Username']),
+			pg_escape_string($password),
+			pg_escape_string($_POST['First']),
+			pg_escape_string($_POST['Last']),
+			pg_escape_string($_POST['Email']),
+			pg_escape_string($_POST['Gender'],
+			);
+	} else {
+		$createuser = sprintf("INSERT INTO GTUser(username, password, firstName, lastName, email, gender, bdate, currentCity) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');",
+			pg_escape_string($_POST['Username']),
+			pg_escape_string($password),
+			pg_escape_string($_POST['First']),
+			pg_escape_string($_POST['Last']),
+			pg_escape_string($_POST['Email']),
+			pg_escape_string($_POST['Gender'],
+			
+			pg_escape_string($_POST['City']));
+	}
 	
 	$conn = pg_connect('host=postgres.cise.ufl.edu user=cmoore password=calvin#1 dbname=ghosttalk');
 	
