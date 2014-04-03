@@ -1,11 +1,14 @@
 /*custom font for text*/
 @import url(http://fonts.googleapis.com/css?family=Nunito);
-/*CSS file for fontawesome - an iconfont we will be using. This CSS file imported contains the font-face declaration. More info: http://fortawesome.github.io/Font-Awesome/ */
+/*CSS file for fontawesome - an iconfont being used. This CSS file imported contains the font-face declaration. More info: http://fortawesome.github.io/Font-Awesome/ */
 @import url(http://thecodeplayer.com/uploads/fonts/fontawesome/css/font-awesome.min.css);
 
 /*Basic reset*/
 * {margin: 0; padding: 0;}
-
+#tabs a {
+    text-decoration:none;
+    color:white;
+}
 body {
 	font-family: Nunito, arial, verdana;
 	background:	#000000;
@@ -22,11 +25,14 @@ h2 {
     text-align:center;
     color:	 #EBEBEB;
 }
+#tabs {
+    top:50px;
+}
 #tabs ul{
+    position:relative;
 	list-style-type: none;
-	position: fixed;
-	margin-top:-30px;
-	margin-left:10px;
+	margin-left:20%;
+	top:90px;
 }
 
 #tabs li {
@@ -52,9 +58,9 @@ h2 {
 	margin-top:5%;
 	margin-left:2%;
 	color: white;
-	/*cool shadow and glow effect*/
+	/*Some cool shadow and glow effect*/
 	box-shadow: 
-		0 5px 15px 1px rgba(0, 0, 0, 0.6), 
+		0 5px 10px 1px rgba(0, 0, 0, 0.6), 
 		0 0 200px 1px rgba(255, 255, 255, 5);
 }
 /*heading styles*/
@@ -83,6 +89,7 @@ h2 {
 	line-height: 27px;
 	display: block;
 	padding: 0 15px;
+	/*transition for smooth hover animation*/
 	transition: all 0.15s;
 }
 /*hover effect on links*/
