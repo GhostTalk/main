@@ -6,6 +6,7 @@
 		<link rel='stylesheet' href='SignUp.css'/>
 		<script src='script.js'></script>
 		<title>Sign Up for GhostTalk</title>
+		<script src='formvaid.js'></script>
 	</head>
 	<body>
 		<?php
@@ -16,7 +17,7 @@
 					echo "<p>Could not create user account.<br>Error: ".$_GET['error']."</p><p>Please try again.</p>";
 			}
 		?>
-		<form action="<?php echo $_SERVER['PHP_SELF']?>" method="POST">
+		<form action="process.php" method="POST">
 		<div id = "required">
 		<fieldset>
 			<table>
