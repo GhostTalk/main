@@ -8,7 +8,7 @@
 	$result = pg_query($conn, $query);
 
 	if($result && $result['email'] == $_POST['Email'])
-		return false;
+		echo false;
 	else
-		return true;
+		echo true;
 ?>

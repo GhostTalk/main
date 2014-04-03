@@ -7,5 +7,5 @@
 	
 	$result = pg_query($conn, $query);
 	
-	return $result;
+	echo $result;
 ?>
