@@ -75,6 +75,9 @@ $(document).ready(function(){
 		<li>
 			<h3>Search</h3>
 		</li>
+		<li>
+			<h3>Requests</h3>
+		</li>
 	</ul>
 </div>
 
