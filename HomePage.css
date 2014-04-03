@@ -25,14 +25,12 @@ h2 {
     text-align:center;
     color:	 #EBEBEB;
 }
-#tabs {
-    top:50px;
-}
+
 #tabs ul{
-    position:relative;
+    position:absolute;
 	list-style-type: none;
 	margin-left:20%;
-	top:90px;
+	top:13%;
 }
 
 #tabs li {
