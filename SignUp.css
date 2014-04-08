@@ -1,12 +1,10 @@
 #required {
-    border:1px solid;
     height:300px;
     margin:auto;
     width:1200px;
     margin-top:2%;
 }
 #notrequired {
-    border:1px solid;
     height:300px;
     margin:auto;
     width:1200px;
@@ -22,7 +20,6 @@ button {
 }
 table {
     width:150%;
-    border:1px solid;
 }
 body {
     background: -webkit-radial-gradient(#f2f2f2, black, black); /* Safari 5.1 to 6.0 */
