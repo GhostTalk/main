@@ -1,63 +1,138 @@
+#!/usr/local/bin/php
+
 <?php
-if(isset($_POST['Username'])) { $username = $_POST['Username'];}
-if(isset($_POST['Password'])) { $password = $_POST['Password'];}
-if(isset($_POST['RPassword'])) { $Rpassword = $_POST['RPassword'];}
-if(isset($_POST['Email'])) { $email = $_POST['Email'];}
-if(isset($_POST['First'])) { $first = $_POST['First'];}
-if(isset($_POST['Last'])) { $last = $_POST['Last'];}
-if(isset($_POST['gender'])) { $gender = $_POST['gender'];}
+	function validate_email($email) {
+		$query = sprintf("SELECT email FROM GTUser WHERE email='%s'",
+			pg_escape_string($email));
+		$conn = pg_connect('host=postgres.cise.ufl.edu user=cmoore password=calvin#1 dbname=ghosttalk');
 
-$errors = array();
-$data = array();
+		$result = pg_query($conn, $query);
 
-//Checking Username is filled,correct, and not taken
-if($username === '' || !preg_match('/^[a-z0-9.-_]+$/', $username)){
-	$errors['Username'] = 'A valid username is required';
-}
-
-//Checking email is filled,correct, and not taken
-if($email === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)){
-	$errors['Email'] = 'A valid email is required';
-}
-
-//checking password is valid and that the passwords match
-if($password === '' || !preg_match('/^[a-z0-9.-_]+$/', $password)){
-	$errors['password'] = 'A valid password is required';
-}
-
-if($password != $Rpassword){
-	$errors['passwordMatch'] = 'Passwords do not match';
-}
-
-//Checking first name is filled and correct
-if($first === ''||!preg_match('/^[A-Za-z]+$/', $first)){
-	$errors['First'] = 'A valid first name is required';
-}
-
-//Checking last name is filled and correct
-if($last === '' ||!preg_match('/^[A-Za-z]+$/', $last)){
-	$errors['Last'] = 'A valid last name is required';
-}
-
-if(empty($_POST['gender'])){
-	$errors['gender'] = 'Gender is required';
-}
-
-if(!empty($errors)){
-
-	$data['success'] = false;
-	$data['errors'] = $errors;
-}
-
-else{
-	//There are no errors
-	//Insert Form data into database here
+		if($result && pg_fetch_result($result, 'email') == $email)
+			return false;
+		else
+			return true;
+	}
 	
-	include 'create_account.php';
-	$data['success'] = true;
-	$data['message'] = 'Form has been submitted';
-}
+	function validate_username($username) {
+		$query = sprintf("SELECT username FROM GTUser WHERE username='%s'",
+			pg_escape_string($_POST['Username']));
+		$conn = pg_connect('host=postgres.cise.ufl.edu user=cmoore password=calvin#1 dbname=ghosttalk');
 
-echo json_encode($data);
+		$result = pg_query($conn, $query);
+
+		if($result && pg_fetch_result($result,'username') == $_POST['Username'])
+			return false;
+		else if(!$result)
+			return false;
+		else
+			return true;
+	}
+	
+	$errors = array();
+	$data = array();
+	$err = false;
+	
+	if(!empty($_POST['Username'])) {
+		$username = $_POST['Username'];
+	} else {
+		$errors['Username'] = '*Username required.';
+		$err = true;
+	}
+
+	if(!empty($_POST['Password'])) {
+		$password = $_POST['Password'];
+	} else {
+		$errors['Password'] = 'Password required.';
+		$err = true;
+	}
+
+	if(!empty($_POST['RPassword'])) {
+		$Rpassword = $_POST['RPassword'];
+	} else {
+		$err = true;
+	}
+
+	if(!empty($_POST['Email'])) {
+		$email = $_POST['Email'];
+	} else {
+		$errors['Email'] = '*Email required.';
+		$err = true;
+	}
+
+	if(!empty($_POST['First'])) {
+		$first = $_POST['First'];
+	} else {
+		$errors['First'] = '*Full name required.';
+		$err = true;
+	}
+
+	if(!empty($_POST['Last'])) {
+		$last = $_POST['Last'];
+	} else {
+		$errors['Last'] = '*Full name required.';
+		$err = true;
+	}
+
+	if(!empty($_POST['gender'])) {
+		$gender = $_POST['gender'];
+	} else {
+		$errors['gender'] = '*Gender is required';
+		$err = true;
+	}
+
+	//Checking Username is filled,correct, and not taken
+	if(!preg_match('/^[A-Za-z0-9_]+$/', $username)){
+		$errors['Username'] = 'A valid username is required';
+		$err = true;
+	}
+	
+	if(!validate_username($username) && !empty($_POST['Username'])) {
+		$errors['Username'] = 'This username is already taken.';
+		$err = true;
+	}
+
+	//Checking email is filled,correct, and not taken
+	if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+		$errors['Email'] = 'A valid email is required';
+		$err = true;
+	}
+	
+	if(!validate_email($email) && !empty($_POST['Email'])) {
+		$errors['Email'] = 'This email is already in use.';
+		$err = true;
+	}
+
+	//Confirm password is the same as the retyped password.
+	if($password != $Rpassword){
+		$errors['passwordMatch'] = 'Passwords do not match';
+		$err = true;
+	}
+
+	//Checking first name is filled and correct
+	if(!preg_match('/^[A-Za-z]+$/', $first)){
+		$errors['First'] = 'A valid first name is required';
+		$err = true;
+	}
+
+	//Checking last name is filled and correct
+	if(!preg_match('/^[A-Za-z]+$/', $last)){
+		$errors['Last'] = 'A valid last name is required';
+		$err = true;
+	}
+
+	if($err){
+		$data['success'] = false;
+		$data['errors'] = $errors;
+	} else{
+		//There are no errors
+		//Insert Form data into database here
+	
+		include 'create_account.php';
+		$data['success'] = true;
+		$data['message'] = $status['Redirect'];
+	}
+
+	echo json_encode($data);
 ?>
 	

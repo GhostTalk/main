@@ -4,9 +4,8 @@
 <html>
 	<head>
 		<link rel='stylesheet' href='SignUp.css'/>
-		<script src='script.js'></script>
 		<title>Sign Up for GhostTalk</title>
-		<script src='formvaid.js'></script>
+		<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 	</head>
 	<body>
 		<?php
@@ -17,43 +16,44 @@
 					echo "<p>Could not create user account.<br>Error: ".$_GET['error']."</p><p>Please try again.</p>";
 			}
 		?>
-		<form action="process.php" method="POST">
+		<form id="signupform">
 		<div id = "required">
 		<fieldset>
 			<table>
 				<tr>
 					<td>
-						<label for="Username">Username: </label> <input type="text" name="Username" id="Username" maxlength="15" value="<?php if(isset($username)){echo $username;}?>">
-						<?php if(isset($errUser)){echo $errUser;}?>
+						<label for="Username">Username: </label> <input type="text" name="Username" id="Username" maxlength="15">
+						<div id="UsernameErr" class="Error"></div>
+					</td>
 				</tr>
 				<tr>
 					<td>
-						<label for="Password">Password: </label> <input type="password" name="Password" id="Password" value="<?php if(isset($password)){echo $password;}?>">
-						<?php if(isset($errPass)){echo $errPass;}?>
+						<label for="Password">Password: </label> <input type="password" name="Password" id="Password">
+						<div id="PasswordErr" class="Error"></div>
 					</td>
 				</tr>
 				<tr>
 					<td>
 						<label for="RPassword">Retype Password: </label> <input type="password" name="RPassword" id="RPassword">
-						<?php if(isset($errPassMatch)){echo $errPassMatch;}?>
+						<div id="RPasswordErr" class="Error"></div>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<label for="Email">Email: </label> <input type="Email" name="Email" id="Email" value="<?php if(isset($email)){echo $email;}?>">
-						<?php if(isset($errEmail)){echo $errEmail;}?>
+						<label for="Email">Email: </label> <input type="Email" name="Email" id="Email">
+						<div id="EmailErr" class="Error"></div>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<label for="First">First Name: </label> <input type="text" name="First" id="First" value="<?php if(isset($first)){echo $first;}?>" >
-						<?php if(isset($errFirst)){echo $errFirst;}?>
+						<label for="First">First Name: </label> <input type="text" name="First" id="First">
+						<div id="FirstErr" class="Error"></div>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<label for="Last">Last Name: </label> <input type="text" name="Last" id="Last" value="<?php if(isset($last)){echo $last;}?>">
-						<?php if(isset($errLast)){echo $errLast;}?>
+						<label for="Last">Last Name: </label> <input type="text" name="Last" id="Last">
+						<div id="LastErr" class="Error"></div>
 					</td>
 				</tr>
 				<tr>
@@ -72,8 +72,9 @@
 				</tr>
 				<tr>
 					<td>
-						<label for="Male">Male: </label><input type="radio" name="gender" value="Male"/> 
-						<label for="Female">Female: </label><input type="radio" name="gender" value="Female"/>
+						<label for="Male">Male: </label><input type="radio" name="gender" id="gender" value="M"/> 
+						<label for="Female">Female: </label><input type="radio" name="gender" id="gender" value="F"/>
+						<div id="genderErr" class="Error"></div>
 			
 					</td>
 				<tr>
@@ -89,17 +90,70 @@
 				</tr>
 				<tr>
 					<td>
-						<!---Sex--->
-					</td>
-				</tr>
-				<tr>
-					<td>
 						<!---Picture--->
 					</td>
 				</tr>
 			</table>
-			<button type="Submit" name="action" value="submit">Submit</button>
+			<button type="Submit" name="action">Submit</button>
 		</div>
 		</form>
+		
+		<script>
+			$(document).ready(function() {
+				$("#signupform").submit(function(e){
+
+					$.ajax({
+						type   		: 'POST',
+						url	   		: 'process.php',
+						data   		: $('#signupform').serialize(),
+						dataType 	: 'json'
+					})
+		
+					.done(function(data){
+						$(".Error").empty();
+						
+						if(!data.success){
+							if(data.errors.Username){
+								$('#UsernameErr').append(data.errors.Username);
+							}
+								
+							if(data.errors.Email){
+								$('#EmailErr').append(data.errors.Email);
+							}
+									
+							if(data.errors.Password){
+								$('#PasswordErr').append(data.errors.Password);
+							}
+									
+							if(data.errors.passwordMatch){
+								$('#RPasswordErr').append(data.errors.passwordMatch);
+							}
+									
+							if(data.errors.First){
+								$('#FirstErr').append(data.errors.First);
+							}
+									
+							if(data.errors.Last){
+								$('#LastErr').append(data.errors.Last);
+							}
+									
+							if(data.errors.gender){
+								$('#genderErr').append(data.errors.gender);
+							}
+						} else {
+							window.location.href = 'http://cise.ufl.edu/~cmoore';
+						}
+					})
+		
+					.fail(function(data){
+						window.location.href = 'http://cise.ufl.edu/~cmoore/signup.php?error=connection';
+					});
+				
+					e.preventDefault();
+
+				});
+			});
+		</script>
+		
 	</body>
 </html>
