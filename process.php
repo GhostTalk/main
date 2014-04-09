@@ -127,10 +127,8 @@
 	} else{
 		//There are no errors
 		//Insert Form data into database here
-	
-		include 'create_account.php';
+
 		$data['success'] = true;
-		$data['message'] = $status['Redirect'];
 	}
 
 	echo json_encode($data);

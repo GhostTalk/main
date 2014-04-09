@@ -141,12 +141,27 @@
 								$('#genderErr').append(data.errors.gender);
 							}
 						} else {
-							window.location.href = 'http://cise.ufl.edu/~cmoore';
+							$.ajax({
+								type   		: 'POST',
+								url	   		: 'create_account.php',
+								data   		: $('#signupform').serialize(),
+								dataType 	: 'json'
+							})
+							
+							.done(function(status) {
+								alert(status.Redirect);
+								window.location.href = status.Redirect;
+							})
+							.fail(function(status) {
+								alert(status.Redirect);
+								window.location.href = status.Redirect;
+							});
 						}
 					})
 		
 					.fail(function(data){
-						window.location.href = 'http://cise.ufl.edu/~cmoore/signup.php?error=connection';
+						alert("Error!");
+						//window.location.href = 'http://cise.ufl.edu/~cmoore/signup.php?error=connection';
 					});
 				
 					e.preventDefault();

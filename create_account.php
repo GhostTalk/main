@@ -6,8 +6,7 @@
 	}
 	
 	$status = array();
-	$status['Redirect'] = '';
-
+	
 	$validChars = array('0','1','2', '3', '4', '5', '6', '7', '8', '9','?','-','_', '/', '%','<', '>', ',', '.', '|', '[', ']', '{', '}', '`', '~', '!', '@', '#', '$', '^', '&', '*', '(', ')', 'A',  'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z');
 	$validCharsCount = count($validChars);
 
@@ -77,36 +76,18 @@
 		$result = pg_query($conn, $createviews);
 		
 		if($result) {
-			$status['Created'] = true;
 			$status['Redirect'] = 'http://cise.ufl.edu/~cmoore';
-		}
-		else{
-			if(pg_connection_status($conn) === PGSQL_CONNECTION_BAD){
-				$deleteacc = sprintf("DELETE FROM GTUser WHERE username='%s'",
-					pg_escape_string($_POST['Username']));
-				
-				pg_query($conn, $deleteacc);
-				
-				$status['Created'] = false;
-				$status['Redirect'] = 'http://cise.ufl.edu/~cmoore/signup.php?error=connection';
-			} else {
-				$deleteacc = sprintf("DELETE FROM GTUser WHERE username='%s'",
-					pg_escape_string($_POST['Username']));
-				
-				pg_query($conn, $deleteacc);
-				
-				$status['Created'] = false;
-				$status['Redirect'] = 'http://cise.ufl.edu/~cmoore/signup.php?error=' . pg_result_status($result);
-			}	
-		}
-	}
-	else {
-		if(pg_connection_status($conn) === PGSQL_CONNECTION_BAD){
-			$status['Created'] = false;
-			$status['Redirect'] = 'http://cise.ufl.edu/~cmoore/signup.php?error=connection';
-		} else {
-			$status['Created'] = false;
+		} else{
+			$deleteacc = sprintf("DELETE FROM GTUser WHERE username='%s'",
+				pg_escape_string($_POST['Username']));
+			
+			pg_query($conn, $deleteacc);
+			
 			$status['Redirect'] = 'http://cise.ufl.edu/~cmoore/signup.php?error=' . pg_result_status($result);
 		}
+	} else {
+		$status['Redirect'] = 'http://cise.ufl.edu/~cmoore/signup.php?error=' . pg_result_status($result);
 	}
+	
+	echo json_encode($status);
 ?>
