@@ -149,11 +149,9 @@
 							})
 							
 							.done(function(status) {
-								alert(status.Redirect);
 								window.location.href = status.Redirect;
 							})
 							.fail(function(status) {
-								alert(status.Redirect);
 								window.location.href = status.Redirect;
 							});
 						}
