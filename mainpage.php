@@ -14,10 +14,24 @@
 <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 <script>
 //append all html content formed by PHP into the id specified using AJAX
-	$.ajax({url:"inbox.php"}).done(function(html){
-		$("#tab1").append(html);
+/*	$.ajax({url:"inbox.php"}).done(function(message){
+		$("#tab1").append(message);
 		});
-		
+*/
+			$.ajax({
+				url:"inbox.php",
+				type: "POST",
+				dataType: "JSON",
+				success: successC
+				});
+				
+				function successC(response){
+					console.log("Message was deleted");
+					$.each(response, function(index, value) {
+						$('#tab1').append(value);
+					});
+				}	
+				
 </script>
 <script>
 $(document).ready(function(){
@@ -30,7 +44,7 @@ $(document).ready(function(){
 			}
 		});
 		
-	 
+	jQuery(document).ajaxComplete(function () {
 	 $(".messagebox").click(function(e) {
 		var box = $(this);
 		var sentBy = $(this).find("#sender").html();
@@ -61,8 +75,9 @@ $(document).ready(function(){
 				$(box).remove();
 			}
 			
-		});
+			});
 		
+		});
 	});
 	
 		setTimeout(function(){
