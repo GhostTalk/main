@@ -1,15 +1,15 @@
-#required {
-    height:300px;
-    margin:auto;
-    width:1200px;
-    margin-top:15%;
+#required{
+    margin-top:10%;
 }
 td { 
     font-family:Arial;
     font-size:20px;
+    color:yellow;
 }
 button {
+    position:relative;
     margin-left:50%;
+    margin-bottom:10%
 }
 table {
     width:150%;
