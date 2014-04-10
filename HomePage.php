@@ -10,9 +10,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel='stylesheet' href='HomePage.css'/>
+	<link rel='stylesheet' href='style.css'/>
 	<script src='script.js'></script>
 <script src="http://thecodeplayer.com/uploads/js/prefixfree-1.0.7.js" type="text/javascript" type="text/javascript"></script>
+
+
 <script src="http://thecodeplayer.com/uploads/js/jquery-1.7.1.min.js" type="text/javascript"></script>
 <script src="//code.jquery.com/jquery-1.9.1.js"></script>
 <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
@@ -25,7 +27,7 @@ $(document).ready(function(){
 		{
 			$(this).next().slideDown();
 		}
-	})
+	});
 })
 </script>
 <script>
@@ -56,6 +58,7 @@ $(document).ready(function(){
             </div>
         </div>
 </div>
+
 <div id="accordian">
 	<ul>
 		<li>
@@ -76,7 +79,7 @@ $(document).ready(function(){
 			<h3>Search</h3>
 		</li>
 		<li>
-			<h3>Requests</h3>
+		    <h3>Requests</h3>
 		</li>
 	</ul>
 </div>
