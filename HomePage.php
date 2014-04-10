@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel='stylesheet' href='style.css'/>
+	<link rel='stylesheet' href='HomePage.css'/>
 	<script src='script.js'></script>
 <script src="http://thecodeplayer.com/uploads/js/prefixfree-1.0.7.js" type="text/javascript" type="text/javascript"></script>
 
