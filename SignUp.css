@@ -40,4 +40,6 @@ margin:0px auto;
 .Error {
     display:inline-block;
     text-align:right;
+    color:#FF0000;
+    font-size:12px;
 }
