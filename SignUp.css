@@ -1,5 +1,5 @@
 #required{
-    margin-top:10%;
+    margin-top:15%;
 }
 td { 
     font-family:Arial;
@@ -9,7 +9,7 @@ td {
 button {
     position:relative;
     margin-left:50%;
-    margin-bottom:10%
+    margin-bottom:15%
 }
 table {
     width:150%;
@@ -18,7 +18,7 @@ body {
     background: -webkit-radial-gradient(white, black, black); /* Safari 5.1 to 6.0 */
 background: -o-radial-gradient(white, black, black); /* For Opera 11.6 to 12.0 */
 background: -moz-radial-gradient(white, black, black); /* For Firefox 3.6 to 15 */
-background: radial-gradient(white, black, black); /* Standard syntax (must be last) */
+background: radial-gradient(#BDBDBD, black, black); /* Standard syntax (must be last) */
 }
 label{
 display:inline-block;
