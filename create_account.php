@@ -51,7 +51,7 @@
 	$result = pg_query($conn, $createuser);
 	
 	if($result) {
-		$createviews = sprintf("CREATE VIEW %s_groups AS SELECT username, firstname, lastname, picture FROM GTUser JOIN Groups ON username=memberUsername WHERE creatorUsername='%s';
+		$createviews = sprintf("CREATE VIEW %s_groups AS SELECT username, name, firstname, lastname, picture FROM GTUser JOIN Groups ON username=memberUsername WHERE creatorUsername='%s';
 		CREATE VIEW %s_messages_received AS SELECT creatorUsername, picture, postTime, expirationTime, body FROM Posts JOIN GTUser ON creatorUsername=username WHERE receiverUsername = '%s';
 		CREATE VIEW %s_requests_received AS SELECT username, firstname, lastname, picture FROM GTUser JOIN Requests ON senderUsername=username WHERE receiverUsername = '%s';
 		CREATE VIEW %s_requests_sent AS SELECT username, firstname, lastname, picture FROM GTUser JOIN Requests ON receiverUsername=username WHERE senderUsername='%s';
