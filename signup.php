@@ -78,23 +78,14 @@
 			
 					</td>
 				<tr>
-			</table>
-			</fieldset>
-		</div>
-		<div id = "notrequired">
-			<table>
 				<tr>
 					<td>
 						<label for="City">Current City: </label><input type="text" name="City" id="City">
 					</td>
 				</tr>
-				<tr>
-					<td>
-						<!---Picture--->
-					</td>
-				</tr>
 			</table>
 			<button type="Submit" name="action">Submit</button>
+			</fieldset>
 		</div>
 		</form>
 		
