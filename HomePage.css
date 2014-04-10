@@ -1,9 +1,6 @@
-/*custom font for text*/
 @import url(http://fonts.googleapis.com/css?family=Nunito);
-/*CSS file for fontawesome - an iconfont being used. This CSS file imported contains the font-face declaration. More info: http://fortawesome.github.io/Font-Awesome/ */
 @import url(http://thecodeplayer.com/uploads/fonts/fontawesome/css/font-awesome.min.css);
 
-/*Basic reset*/
 * {margin: 0; padding: 0;}
 #tabs a {
     text-decoration:none;
@@ -25,7 +22,6 @@ h2 {
     text-align:center;
     color:	 #EBEBEB;
 }
-
 #tabs ul{
     position:absolute;
 	list-style-type: none;
@@ -95,7 +91,6 @@ h2 {
 	background: linear-gradient(#AA1111, #EBEBEB);
 	border-left: 5px solid black;
 }
-/*hides the non active LIs by default*/
 #accordian ul ul {
 	display: none;
 }
