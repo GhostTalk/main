@@ -22,43 +22,43 @@
 			<table>
 				<tr>
 					<td>
-						<label for="Username">Username: </label> <input type="text" name="Username" id="Username" maxlength="15">
+						<label for="Username">*Username: </label> <input type="text" name="Username" id="Username" maxlength="15">
 						<div id="UsernameErr" class="Error"></div>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<label for="Password">Password: </label> <input type="password" name="Password" id="Password">
+						<label for="Password">*Password: </label> <input type="password" name="Password" id="Password">
 						<div id="PasswordErr" class="Error"></div>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<label for="RPassword">Retype Password: </label> <input type="password" name="RPassword" id="RPassword">
+						<label for="RPassword">*Retype Password: </label> <input type="password" name="RPassword" id="RPassword">
 						<div id="RPasswordErr" class="Error"></div>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<label for="Email">Email: </label> <input type="Email" name="Email" id="Email">
+						<label for="Email">*Email: </label> <input type="Email" name="Email" id="Email">
 						<div id="EmailErr" class="Error"></div>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<label for="First">First Name: </label> <input type="text" name="First" id="First">
+						<label for="First">*First Name: </label> <input type="text" name="First" id="First">
 						<div id="FirstErr" class="Error"></div>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<label for="Last">Last Name: </label> <input type="text" name="Last" id="Last">
+						<label for="Last">*Last Name: </label> <input type="text" name="Last" id="Last">
 						<div id="LastErr" class="Error"></div>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<label for="Birthday">Birthday: </label> 
+						<label for="Birthday">*Birthday: </label> 
 						<select name="dob_month" id="dob_month" class="input_pulldown"> 
 						<option value="01">January</option><option value="02">February</option><option value="03">March</option><option value="04">April</option><option value="05">May</option><option value="06" selected="selected">June</option><option value="07">July</option><option value="08">August</option><option value="09">September</option><option value="10">October</option><option value="11">November</option><option value="12">December</option>
 						</select>
