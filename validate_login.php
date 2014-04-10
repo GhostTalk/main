@@ -9,7 +9,7 @@
 	if($result && crypt($_POST['Password'], $result['password']) == $result['password']) {
 		session_start();
 		$_SESSION['Username'] = $_POST['Username'];
-		header('Location: http://cise.ufl.edu/~cmoore/Homepage.html');
+		header('Location: http://cise.ufl.edu/~cmoore/HomePage.php');
 		exit();
 	} else {
 		header('Location: http://cise.ufl.edu/~cmoore');
