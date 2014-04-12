@@ -4,7 +4,7 @@
 <html>
 	<head>
 		<link rel='stylesheet' href='HomePage.css'/>
-		<script src="http://thecodeplayer.com/uploads/js/prefixfree-1.0.7.js" type="text/javascript" type="text/javascript"></script>
+		<!--<script src="http://thecodeplayer.com/uploads/js/prefixfree-1.0.7.js" type="text/javascript" type="text/javascript"></script>-->
 		<script src="http://thecodeplayer.com/uploads/js/jquery-1.7.1.min.js" type="text/javascript"></script>
 		<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
 		<script src="//code.jquery.com/jquery-1.9.1.js"></script>
@@ -52,7 +52,7 @@
 							},
 							
 							close: function (ev, ui) {
-								var dataObject = {sender: sentBy, posttime: time};//receiver: $_SESSION['Username'], posttime: time};
+								var dataObject = {sender: sentBy, receiver: 'Christian123', posttime: time};//receiver: $_SESSION['Username'], posttime: time};
 				
 								$.ajax({
 									url:"setMessageRead.php",
