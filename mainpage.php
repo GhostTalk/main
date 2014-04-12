@@ -4,7 +4,6 @@
 <html>
 	<head>
 		<link rel='stylesheet' href='HomePage.css'/>
-		<script src='script.js'></script>
 		<script src="http://thecodeplayer.com/uploads/js/prefixfree-1.0.7.js" type="text/javascript" type="text/javascript"></script>
 		<script src="http://thecodeplayer.com/uploads/js/jquery-1.7.1.min.js" type="text/javascript"></script>
 		<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
@@ -13,11 +12,6 @@
 		<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
 		<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 		<script>
-			//append all html content formed by PHP into the id specified using AJAX
-			/**$.ajax({url:"inbox.php"}).done(function(message){
-				$("#tab1").append(message);
-			});**/
-
 			$.ajax({
 				url:"inbox.php",
 				type: "POST",
@@ -25,10 +19,8 @@
 				})
 				
 				.done(function(response){
-					console.log("Message was deleted");
 					$.each(response, function(index, value) {
 						$('#tab1').append(value);
-						//$('#tab1').append("<div><p><strong>Cool</strong></p></div>");
 					});
 				});
 		</script>
@@ -47,41 +39,43 @@
 						var box = $(this);
 						var sentBy = $(this).find("#sender").html();
 						var time = $(this).find("#posttime").html();
+						var expires = $(this).find("#expirationtime").html();
 						$(this).find(".dialog").dialog({
-							title:'dialog',
+							title: sentBy + '\'s Message:',
 							width: 600,
 							height: 400,
 							modal:true,
 							resizable:false,
 							draggable:false,
-		
+							open: function(event, ui) {
+								setTimeout("$('.dialog').dialog('close')", expires);
+							},
+							
 							close: function (ev, ui) {
-								var dataObject = {sender: sentBy, posttime: time};
+								var dataObject = {sender: sentBy, posttime: time};//receiver: $_SESSION['Username'], posttime: time};
 				
 								$.ajax({
-									url:"deleteMessage.php",
+									url:"setMessageRead.php",
 									type: "POST",
 									data: dataObject,
-									dataType: "JSON",
-									success: successCall
+									dataType: "json"
+								})
+								
+								.done(function() {
+									console.log("Message deleted successfully.");
+								})
+								
+								.fail(function() {
+									console.log("Encountered error deleting message.");
 								});
-				
+								
 								$(this).dialog("destroy");
 								$(this).remove();
 								$(box).remove();
 							}
 						});
 					});
-				});
-	
-				setTimeout(function(){
-					$('.dialog').dialog('close');
-				}, 3000);
-				
-				function successCall(){
-					console.log("Message was deleted");
-				}	
-		
+				});	
 			});
 		</script>
 		<script>
