@@ -4,8 +4,8 @@
 	session_start();
 	$conn = pg_connect("host=postgres.cise.ufl.edu user=cmoore dbname=ghosttalk password=calvin#1");
 
-	$user = 'Christian123';		//$user = $_SESSION['user'];
-	$query = sprintf("SELECT * FROM %s_messages_received WHERE read=false OR expirationTime IS NULL",
+	$user = $_SESSION['Username'];
+	$query = sprintf("SELECT * FROM %s_messages_received WHERE read=false OR expirationTime IS NULL ORDER BY postTime ASC",
 		$user);
 	$result = pg_query($conn, $query);
 	
