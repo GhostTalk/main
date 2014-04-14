@@ -13,6 +13,7 @@ button {
 }
 table {
     width:150%;
+    border: solid white;
 }
 body {
  background-color: black;
@@ -32,6 +33,7 @@ fieldset{
 border:none;
 width:500px;
 margin:0px auto;
+color:red;
 }
 
 .Error {
