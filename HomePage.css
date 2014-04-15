@@ -94,3 +94,23 @@ h2 {
 #accordian ul ul {
 	display: none;
 }
+#sender{
+	position:relative;
+	left:10%;
+	margin-top:-3%;
+}
+
+#posttime {
+	position:relative;
+	left:10%;
+}
+#expires {
+	position:absolute;
+	margin-left:80%;
+}
+.messagebox{
+	border: black solid 2px;
+	color:#BDBDBD;
+	font-family:Arial;
+	
+}
