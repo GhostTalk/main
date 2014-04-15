@@ -46,3 +46,42 @@ margin:0px auto;
     color:#FF0000;
     font-size:12px;
 }
+.fadein {
+    position:absolute;
+    top:33%;
+    left:10%;
+    margin:auto;
+}
+.fadein img {
+    position:absolute;
+    left:-10%;
+    top:10%;
+    -webkit-animation-name: fade;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-duration: 20s;
+    -moz-animation-name: fade;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-duration: 10s;
+    animation-name: fade;
+    animation-iteration-count: infinite;
+    animation-duration: 20s;
+}
+
+@-webkit-keyframes fade {
+    0% {opacity: 0;}
+    20% {opacity: 1;}
+    33% {opacity: 1;}
+    53% {opacity: 0;}
+    100% {opacity: 0;}
+}
+@keyframes fade {
+    0% {opacity: 0;}
+    20% {opacity: 1;}
+    33% {opacity: 1;}
+    53% {opacity: 0;}
+    100% {opacity: 0;}
+}
+
+#f1 {
+    -webkit-animation-delay: -10s;
+}
