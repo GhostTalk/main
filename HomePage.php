@@ -128,6 +128,10 @@
 					</div>
 				</div>
 		</div>
+		<div class="alsofade">
+    
+			<img id="f3" src="http://imgur.com/VJ6iKzk.jpg"	height="100px" width="100px">
+		</div>
 		<div id="accordian">
 			<ul>
 				<li>
