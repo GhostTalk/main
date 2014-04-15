@@ -40,7 +40,7 @@ h2 {
 #right {
     background: linear-gradient(#AA1111, black);
     position:absolute;
-    width:100%;
+    width:80%;
     border:2px solid white;
     height:600px;
     margin-left:15%;
@@ -106,7 +106,7 @@ h2 {
 }
 #expires {
 	position:absolute;
-	margin-left:80%;
+	margin-left:90%;
 }
 .messagebox{
 	border: black solid 2px;
