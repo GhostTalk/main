@@ -47,7 +47,7 @@ h2 {
 #accordian {
 	background: #EBEBEB;
 	width: 200px;
-	margin-top:5%;
+	margin-top:10%;
 	margin-left:2%;
 	color: white;
 	/*Some cool shadow and glow effect*/
@@ -111,4 +111,49 @@ h2 {
 	color:#BDBDBD;
 	font-family:Arial;
 	
+}
+
+.fadein {
+    position:absolute;
+    top:60%;
+    left:2%;
+    margin:auto;
+}
+.fadein img {
+    position:absolute;
+    left:-10%;
+    top:0;
+    -webkit-animation-name: fade;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-duration: 20s;
+    -moz-animation-name: fade;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-duration: 20s;
+    animation-name: fade;
+    animation-iteration-count: infinite;
+    animation-duration: 20s;
+}
+
+@-webkit-keyframes fade {
+    0% {opacity: 0;}
+    20% {opacity: 1;}
+    33% {opacity: 1;}
+    53% {opacity: 0;}
+    100% {opacity: 0;}
+}
+@keyframes fade {
+    0% {opacity: 0;}
+    20% {opacity: 1;}
+    33% {opacity: 1;}
+    53% {opacity: 0;}
+    100% {opacity: 0;}
+}
+
+#f1 {
+    -webkit-animation-delay: -10s;
+    -moz-animation-delay:-10s;
+}
+#f2 {
+    -webkit-animation-delay: -20s;
+    -moz-animation-delay:-20s;
 }
