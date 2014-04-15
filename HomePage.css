@@ -157,3 +157,43 @@ h2 {
     -webkit-animation-delay: -20s;
     -moz-animation-delay:-20s;
 }
+.alsofade {
+    position:absolute;
+    top:10%;
+    left:5%;
+    margin:auto;
+}
+.alsofade img {
+    position:absolute;
+    left:-10%;
+    top:0;
+    -webkit-animation-name: fadetwo;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-duration: 10s;
+    -moz-animation-name: fadetwo;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-duration: 10s;
+    animation-name: fadetwo;
+    animation-iteration-count: infinite;
+    animation-duration: 10s;
+}
+
+@-webkit-keyframes fadetwo {
+    0% {opacity: 0;}
+    20% {opacity: 1;}
+    33% {opacity: 1;}
+    53% {opacity: 1;}
+    100% {opacity: 0;}
+}
+@keyframes fadetwo {
+    0% {opacity: 0;}
+    20% {opacity: 1;}
+    33% {opacity: 1;}
+    53% {opacity: 1;}
+    100% {opacity: 0;}
+}
+
+#f3 {
+    -webkit-animation-delay: -2s;
+    -moz-animation-delay:-2s;
+}
