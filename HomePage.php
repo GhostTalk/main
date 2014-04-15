@@ -177,5 +177,9 @@
 				</li>
 			</ul>
 		</div>
+		<div class="fadein">
+			<img id="f1" src="http://imgur.com/VJ6iKzk.jpg"	height="200px" width="200px">
+			<img id="f2" src="http://imgur.com/vcNd1PS.jpg" height="200px" width="200px">
+		</div>
 	</body>
 </html>
