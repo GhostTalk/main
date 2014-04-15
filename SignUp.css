@@ -36,7 +36,8 @@ fieldset{
 border:none;
 width:500px;
 margin:0px auto;
-color:red;
+color:white;
+font-family: Arial;
 }
 
 .Error {
