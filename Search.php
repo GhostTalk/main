@@ -2,7 +2,6 @@
 <html>
 <head>
 	<link rel='stylesheet' href='Search.css'/>
-	<script src='script.js'></script>
 	<script src="http://thecodeplayer.com/uploads/js/prefixfree-1.0.7.js" type="text/javascript" type="text/javascript"></script>
 <script src="http://thecodeplayer.com/uploads/js/jquery-1.7.1.min.js" type="text/javascript"></script>
 <script>
