@@ -17,13 +17,13 @@
 				url		: "inbox.php",
 				type	: "POST",
 				dataType: "json"
-				})
+			})
 				
-				.done(function(response){
-					$.each(response, function(index, value) {
-						$('#tab1').append(value);
-					});
+			.done(function(response){
+				$.each(response, function(index, value) {
+					$('#tab1').append(value);
 				});
+			});
 		</script>
 		<script>
 			$(document).ready(function(){
@@ -40,19 +40,27 @@
 					$(".messagebox").click(function(e) {
 						var box = $(this);
 						var sentBy = $(this).find("#sender").html();
-						var time = $(this).find("#posttime").html();
+						var time = $(this).find("#postt").html();
 						var expires = $(this).find("#expirationtime").html();
 						$(this).find(".dialog").dialog({
 							title: sentBy + '\'s Message:',
-							autoOpen: false,
 							width: 600,
 							height: 400,
 							modal:true,
 							resizable:false,
 							draggable:false,
 							open: function(event, ui) {
-								if(!(expires==''))
+								if(!(expires=='')) {
 									setTimeout("$('.dialog').dialog('close')", expires);
+								
+									//var timer = expires;
+									//setInterval(function() {
+									//	if(timer < expires)
+									//		$(this).find('#timer').empty();
+									//	$(this).html(timer);
+									//	timer--;
+									//}, 1000);
+								}
 							},
 							
 							close: function (ev, ui) {
