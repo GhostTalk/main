@@ -16,6 +16,9 @@
 					echo "<p>Could not create user account.<br>Error: ".$_GET['error']."</p><p>Please try again.</p>";
 			}
 		?>
+		<div class = "fadein">
+			<img id="f1" src="http://imgur.com/VJ6iKzk.jpg">
+		</div>
 		<form id="signupform">
 		<div id = "required">
 		<fieldset>
