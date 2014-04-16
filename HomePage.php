@@ -128,10 +128,6 @@
 					</div>
 				</div>
 		</div>
-		<div class="alsofade">
-    
-			<img id="f3" src="http://imgur.com/VJ6iKzk.jpg"	height="100px" width="100px">
-		</div>
 		<div id="accordian">
 			<ul>
 				<li>
@@ -174,16 +170,17 @@
 					</ul>
 				</li>
 				<li>
-					<h3>Search</h3>
+					<h3 id='searchpage'>Search</h3>
+					<script>
+						$('#searchpage').on("click", function() {
+							window.location.href="Search.php";
+						});
+					</script>
 				</li>
 				<li>
 					<h3>Requests</h3>
 				</li>
 			</ul>
-		</div>
-		<div class="fadein">
-			<img id="f1" src="http://imgur.com/VJ6iKzk.jpg"	height="200px" width="200px">
-			<img id="f2" src="http://imgur.com/vcNd1PS.jpg" height="200px" width="200px">
 		</div>
 	</body>
 </html>
