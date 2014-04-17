@@ -18,17 +18,4 @@
 	
 ?>
 
-//Load Friends
-<script>	
-	$.ajax({
-				url		: "loadFriends.php",
-				type	: "POST",
-				dataType: "json"
-			})
-				
-			.done(function(response){
-				$.each(response, function(index, value) {
-					$('#appendToHTMLElement').append(value);
-				});
-			});
-</script>
+
