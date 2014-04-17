@@ -73,3 +73,23 @@ body {
 #mainlist p {
     color:white;
 }
+
+#results p{
+    position:relative;
+    margin-left:30%;
+}
+#results img{
+    position:absolute;
+}
+#results button{
+    margin-left:7%;
+    position:relative;
+    margin-bottom:1%;
+    margin-top:-2%;
+}
+
+#search {
+    color:white;
+    text-align:center;
+    margin-bottom:3%;
+}
