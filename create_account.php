@@ -52,16 +52,10 @@
 	
 	if($result) {
 		$createviews = sprintf("CREATE VIEW %s_groups AS SELECT username, name, firstname, lastname, picture FROM GTUser JOIN Groups ON username=memberUsername WHERE creatorUsername='%s';
-		CREATE VIEW %s_messages_received AS SELECT creatorUsername, picture, postTime, expirationTime, body, read FROM Posts JOIN GTUser ON creatorUsername=username WHERE receiverUsername = '%s';
+		CREATE VIEW %s_messages_received AS SELECT creatorUsername, picture, postTime, expirationTime, body, read, pic FROM Posts JOIN GTUser ON creatorUsername=username WHERE receiverUsername = '%s';
 		CREATE VIEW %s_requests_received AS SELECT username, firstname, lastname, picture FROM GTUser JOIN Requests ON senderUsername=username WHERE receiverUsername = '%s';
 		CREATE VIEW %s_requests_sent AS SELECT username, firstname, lastname, picture FROM GTUser JOIN Requests ON receiverUsername=username WHERE senderUsername='%s';
-		CREATE VIEW %s_messages_sent AS SELECT receiverUsername, picture, postTime, expirationTime, body FROM Posts JOIN GTUser ON receiverUsername=username WHERE creatorUsername = '%s';
-		CREATE VIEW %s_pictures_sent AS SELECT receiverUsername, picture, postTime, expirationTime, body, read, filePath FROM Picture JOIN GTUser ON receiverUsername=username WHERE creatorUsername = '%s';
-		CREATE VIEW %s_pictures_received AS SELECT creatorUsername, picture, postTime, expirationTime, body, filePath FROM Picture JOIN GTUser ON creatorUsername=username WHERE receiverUsername = '%s';",
-			$_POST['Username'],
-			pg_escape_string($_POST['Username']),
-			$_POST['Username'],
-			pg_escape_string($_POST['Username']),
+		CREATE VIEW %s_messages_sent AS SELECT receiverUsername, picture, postTime, expirationTime, body, pic FROM Posts JOIN GTUser ON receiverUsername=username WHERE creatorUsername = '%s';",
 			$_POST['Username'],
 			pg_escape_string($_POST['Username']),
 			$_POST['Username'],

@@ -156,7 +156,7 @@
 										
 										var counter=0;
 										jQuery.each(result, function(index, value) {
-											jQuery('#GroupsList').append(value.name);
+											jQuery('#GroupsList').append("<li>" + value.name + "</li>");
 										});
 									})
 									

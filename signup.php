@@ -16,9 +16,6 @@
 					echo "<p>Could not create user account.<br>Error: ".$_GET['error']."</p><p>Please try again.</p>";
 			}
 		?>
-		<div class = "fadein">
-			<img id="f1" src="http://imgur.com/VJ6iKzk.jpg">
-		</div>
 		<form id="signupform">
 		<div id = "required">
 		<fieldset>
@@ -75,8 +72,9 @@
 				</tr>
 				<tr>
 					<td>
-						<label for="Male">Male: </label><input type="radio" name="gender" id="gender" value="M"/> 
-						<label for="Female">Female: </label><input type="radio" name="gender" id="gender" value="F"/>
+						<label for="gender">Gender:</label>
+						<input type="radio" name="gender" id="gender" value="M"/> Male</input>
+						<input type="radio" name="gender" id="gender" value="F"/>Female</input>
 						<div id="genderErr" class="Error"></div>
 			
 					</td>

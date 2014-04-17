@@ -168,7 +168,9 @@
 					$(document).ready(function() {
 						$(document).ajaxComplete(function () {
 							$('.request').on("click", function(e) {
-								alert(e.target.id);
+								//alert(e.target.id);
+								var divid = "#searchresults" + e.target.id;
+								alert($(divid).find('#un').html());
 							});
 						});
 					});
