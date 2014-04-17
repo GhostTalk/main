@@ -128,6 +128,9 @@
 					</div>
 				</div>
 		</div>
+		<div class="alsofade">
+			<img id="f3" src="http://imgur.com/VJ6iKzk.jpg"	height="100px" width="100px">
+		</div>
 		<div id="accordian">
 			<ul>
 				<li>
@@ -181,6 +184,13 @@
 					<h3>Requests</h3>
 				</li>
 			</ul>
+		</div>
+		<div class="fadein">
+    
+			<img id="f1" src="http://imgur.com/VJ6iKzk.jpg"	height="150px" width="150px">
+    
+			<img id="f2" src="http://imgur.com/vcNd1PS.jpg" height="150px" width="150px">
+
 		</div>
 	</body>
 </html>
