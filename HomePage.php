@@ -113,9 +113,9 @@
 		</div>
 		<div id="tabs">
 				<ul>
-					<li><a href="#tab1"><span class="icon-envelope"></span>Inbox</a></li>
-					<li><a href="#tab2"><span class ="icon-mail-forward"></span>Send</a></li>
-					<li><a href="#tab3"><span class ="icon-folder-open"></span>Sent</a></li>
+					<li><a href="#tab1">Inbox</a></li>
+					<li><a href="#tab2">Send</a></li>
+					<li><a href="#tab3">Sent</a></li>
 				</ul>
 				<div id = "right" style="overflow:auto">
 					<div id = "tab1">
