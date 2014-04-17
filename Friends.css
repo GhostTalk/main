@@ -1,9 +1,10 @@
 * {margin: 0; padding: 0;}
 #accordian {
+	font-family:Arial;
     position:absolute;
 	background: #EBEBEB;
 	width: 200px;
-	margin-top:5%;
+	margin-top:17%;
 	margin-left:2%;
 	color: white;
 	/*Some cool shadow and glow effect*/
