@@ -168,9 +168,23 @@
 					$(document).ready(function() {
 						$(document).ajaxComplete(function () {
 							$('.request').on("click", function(e) {
-								//alert(e.target.id);
-								var divid = "#searchresults" + e.target.id;
-								alert($(divid).find('#un').html());
+								//alert($($(e.target).parent()).find('#un').html());
+								var requestdata = {username: $($(e.target).parent()).find('#un').html()};
+								$.ajax({
+									url		: "sendRequest.php",
+									type	: "POST",
+									data	: requestdata
+								})
+								
+								.done(function() {
+									$($(e.target).parent()).remove();
+								})
+								
+								.fail(function() {
+									alert("Error requesting friend.  Try again later.");
+								});
+								
+								e.preventDefault();
 							});
 						});
 					});
