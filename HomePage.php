@@ -109,7 +109,7 @@
 		?>
 		
 		<div id ="header">
-			<h2>Ghost Talk</h2>
+			<img src = "http://i.imgur.com/ASTbZIp.png" width="50%" height="130px">
 		</div>
 		<div id="tabs">
 				<ul>
@@ -127,6 +127,9 @@
 						<p>Getting real tired of your shit html</p>
 					</div>
 				</div>
+		</div>
+		<div class="alsofade">
+			<img id="f3" src="http://imgur.com/VJ6iKzk.jpg"	height="100px" width="100px">
 		</div>
 		<div id="accordian">
 			<ul>
@@ -181,6 +184,13 @@
 					<h3>Requests</h3>
 				</li>
 			</ul>
+		</div>
+		<div class="fadein">
+    
+			<img id="f1" src="http://imgur.com/VJ6iKzk.jpg"	height="150px" width="150px">
+    
+			<img id="f2" src="http://imgur.com/vcNd1PS.jpg" height="150px" width="150px">
+
 		</div>
 	</body>
 </html>
