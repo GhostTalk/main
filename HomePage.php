@@ -109,7 +109,7 @@
 		?>
 		
 		<div id ="header">
-			<h2>Ghost Talk</h2>
+			<img src = "http://i.imgur.com/ASTbZIp.png" width="50%" height="130px">
 		</div>
 		<div id="tabs">
 				<ul>
