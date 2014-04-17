@@ -24,6 +24,19 @@
 					$('#tab1').append(value);
 				});
 			});
+			
+				$.ajax({
+				url	: "loadlist.php",
+				type	: "POST",
+				dataType: "json"
+			})
+				
+			.done(function(response){
+				$.each(response, function(index, value) {
+					$('#friendlist').append(value);
+				});
+			});
+		
 		</script>
 		<script>
 			$(document).ready(function(){
