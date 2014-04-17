@@ -4,7 +4,7 @@
 * {margin: 0; padding: 0;}
 #tabs a {
     text-decoration:none;
-    color:white;
+    color:black;
 }
 body {
 	font-family: Nunito, arial, verdana;
@@ -16,7 +16,9 @@ body {
     margin-left:5%;
     margin-right:5%;
     border:2px solid;
-    height:40px;
+    height:140px;
+	width=100%; 
+	text-align:center;
 }
 h2 {
     text-align:center;
@@ -110,12 +112,11 @@ h2 {
 	border: black solid 2px;
 	color:#BDBDBD;
 	font-family:Arial;
-	
 }
 
 .fadein {
     position:absolute;
-    top:60%;
+    top:75%;
     left:2%;
     margin:auto;
 }
@@ -157,9 +158,10 @@ h2 {
     -webkit-animation-delay: -20s;
     -moz-animation-delay:-20s;
 }
+
 .alsofade {
     position:absolute;
-    top:10%;
+    top:18%;
     left:5%;
     margin:auto;
 }
