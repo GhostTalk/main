@@ -3,16 +3,16 @@
 <?php
 	if(isset($_POST['username'])) {
 		if(!empty($_POST['uname']))
-			$query = sprintf("SELECT * FROM GTUser WHERE username='%s'",
+			$query = sprintf("SELECT * FROM GTUser WHERE username ILIKE '%%%s%%'",
 				pg_escape_string($_POST['uname']));
 	}
 	if(isset($_POST['eml'])) {
 		if(!empty($_POST['email'])) {
 			if(isset($query)) {
-				$query = $query . sprintf(" INTERSECT SELECT * FROM GTUser WHERE email='%s'",
+				$query = $query . sprintf(" INTERSECT SELECT * FROM GTUser WHERE email ILIKE '%%%s%%'",
 					pg_escape_string($_POST['email']));
 			} else {
-				$query = sprintf("SELECT * FROM GTUser WHERE email='%s'",
+				$query = sprintf("SELECT * FROM GTUser WHERE email ILIKE '%%%s%%'",
 					pg_escape_string($_POST['email']));
 			}
 		}
@@ -20,10 +20,10 @@
 	if(isset($_POST['first'])) {
 		if(!empty($_POST['fname'])) {
 			if(isset($query)) {
-				$query = $query . sprintf(" INTERSECT SELECT * FROM GTUser WHERE firstname='%s'",
+				$query = $query . sprintf(" INTERSECT SELECT * FROM GTUser WHERE firstname ILIKE '%%%s%%'",
 					pg_escape_string($_POST['fname']));
 			} else {
-				$query = sprintf("SELECT * FROM GTUser WHERE firstname='%s'",
+				$query = sprintf("SELECT * FROM GTUser WHERE firstname ILIKE '%s'",
 					pg_escape_string($_POST['fname']));
 			}
 		}
@@ -31,10 +31,10 @@
 	if(isset($_POST['last'])) {
 		if(!empty($_POST['lname'])) {
 			if(isset($query)) {
-				$query = $query . sprintf(" INTERSECT SELECT * FROM GTUser WHERE lastname='%s'",
+				$query = $query . sprintf(" INTERSECT SELECT * FROM GTUser WHERE lastname ILIKE '%%%s%%'",
 					pg_escape_string($_POST['lname']));
 			} else {
-				$query = sprintf("SELECT * FROM GTUser WHERE lastname='%s'",
+				$query = sprintf("SELECT * FROM GTUser WHERE lastname ILIKE '%%%s%%'",
 					pg_escape_string($_POST['lname']));
 			}
 		}
@@ -52,10 +52,10 @@
 	if(isset($_POST['cy'])) {
 		if(!empty($_POST['city'])) {
 			if(isset($query)) {
-				$query = $query . sprintf(" INTERSECT SELECT * FROM GTUser WHERE currentcity='%s'",
+				$query = $query . sprintf(" INTERSECT SELECT * FROM GTUser WHERE currentcity ILIKE '%%%s%%'",
 					pg_escape_string($_POST['city']));
 			} else {
-				$query = sprintf("SELECT * FROM GTUser WHERE currentcity='%s'",
+				$query = sprintf("SELECT * FROM GTUser WHERE currentcity ILIKE '%%%s%%'",
 					pg_escape_string($_POST['city']));
 			}
 		}
@@ -63,7 +63,7 @@
 	if(isset($_POST['sex'])) {
 		if(!empty($_POST['gender'])) {
 			if(isset($query)) {
-				$query = $query . sprintf(" INTERSECT SELECT * FROM GTUser WHERE gender='%s'",
+				$query = $query . sprintf(" INTERSECT SELECT * FROM GTUser WHERE gender='%%%s%%'",
 					pg_escape_string($_POST['gender']));
 			}
 		}
@@ -79,7 +79,7 @@
 		if($result) {
 			$counter = 0;
 			while($row = pg_fetch_assoc($result)) {
-				$results[$counter] = "<div class='searchresults'$counter><img src='' width='100' height='100'><p>".$row['username']."</p><p>".$row['firstname']." ".$row['lastname']."</p><p>".$row['currentcity']."</p><p>".$row['bdate']."</p><button type='Submit' id=$counter class='request'>Request Friendship</button></div>";
+				$results[$counter] = "<div class='searchresults".$counter."'><img src='' width='100' height='100'><p id='un'>".$row['username']."</p><p id='n'>".$row['firstname']." ".$row['lastname']."</p><p id='cc'>".$row['currentcity']."</p><p id='bd'>".$row['bdate']."</p><button type='Submit' id=$counter class='request'>Request Friendship</button></div>";
 				$counter++;
 			}
 		} else {
