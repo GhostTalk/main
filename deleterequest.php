@@ -1,3 +1,5 @@
+#!/usr/local/bin/php
+
 <?php
 	session_start();
 	$conn = pg_connect("host=postgres.cise.ufl.edu user=cmoore dbname=ghosttalk password=calvin#1");

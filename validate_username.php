@@ -2,7 +2,7 @@
 
 <?php
 	$query = sprintf("SELECT username FROM GTUser WHERE username='%s'",
-		pg_escape_string($_POST['Username']);
+		pg_escape_string($_POST['Username']));
 	$conn = pg_connect('host=postgres.cise.ufl.edu user=cmoore password=calvin#1 dbname=ghosttalk');
 
 	$result = pg_query($conn, $query);

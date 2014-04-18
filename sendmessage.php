@@ -1,13 +1,11 @@
 #!/usr/local/bin/php
-
 <?php
 	session_start();
 	$user = $_SESSION['Username'];
-	
 	$returnvals = array();
 	$sent = true;
-	
 	$friend = array();
+
 	$friend = $_POST['friendlist'];
 	if(count($friend) !== count(array_unique($friend))) {
 		$returnvals['sent'] = false;
@@ -15,31 +13,42 @@
 		echo json_encode($returnvals);
 		return;
 	}
+
 	$pic = $_POST['picture'];
 	$expiration = $_POST['expiration'];
+
 	if($expiration==0)
 		$expiration = 'NULL';
-	if($pic=="false") {
+
+		if($pic=="false") {
 		$message = $_POST['message'];
 	} else {
-		//$message = $_POST['picmessage'];
-		//$target_path = "Pictures/$user/" . $_FILES['picmessage'];
-		//$extension = substr($_FILES['picmessage'], strrpos($_FILES['picmessage'], '.') +1);
-	//echo "{message : ". $_FILES['picmessage']['name']."}";
-		//if(!in_array($extension, array('gif', 'png', 'jpg', 'jpeg', 'jpe', 'tif'))) {
+		$target_path = "Pictures/$user/" . basename($_FILES['picmessage']['name']);
+		if(!is_dir("Pictures/$user")) {
+			$old = umask(0);
+			mkdir("Pictures/$user", 0777);
+			umask($old);
+		}
+								//$t = $_FILES['picmessage']['type'];
+								//if(!($t)) {
+								//			$returnvals['sent'] = false;
+								//			$returnvals['message'] = "Unacceptable file format.  Upload only images.";
+								//			echo json_encode($returnvals);
+								//			return;
+								//}
+		if(!(move_uploaded_file($_FILES['picmessage']['tmp_name'], $target_path))) {
 			$returnvals['sent'] = false;
-			$returnvals['message'] = "Unacceptable file format.  Upload only images.";
+			$returnvals['message'] = "Error uploading image.  Please try again.";
 			echo json_encode($returnvals);
 			return;
-		//}
-		
-		//move_uploaded_file($_FILES['picmessage'], $target_path);
-		//$message = $target_path;
+		}
+		$message = $target_path;
 	}
+
 	$date = date('Y-m-d H:i:s T');
-	
+
 	$conn = pg_connect("host=postgres.cise.ufl.edu user=cmoore dbname=ghosttalk password=calvin#1");
-	
+
 	$counter=0;
 	while($counter < count($friend)) {
 		if(!empty($friend[$counter])) {
@@ -50,43 +59,42 @@
 				$expiration,
 				pg_escape_string($message),
 				pg_escape_string($pic));
-			
-			$result = pg_query($conn, $query);
-		
-			if(!$result)
-				$sent=false;
+				$result = pg_query($conn, $query);
+				if(!$result)
+					$sent=false;
 		}
 		$counter++;
 	}
-	
+
 	$friendsemails = array();
 	$counter=0;
 	$count=0;
 	while($counter < count($friend)) {
 		if(!empty($friend[$counter])) {
-			$query = sprintf("SELECT email FROM GTUser WHERE username='%s'",
-				pg_escape_string($friend[$counter]));
-				
+		$query = sprintf("SELECT email FROM GTUser WHERE username='%s'",
+			pg_escape_string($friend[$counter]));
 			$result = pg_query($conn, $query);
-			
 			$friendsemails[$count] = pg_fetch_result($result, 0, 0);
 			$count++;
 		}
 		$counter++;
 	}
-	
+
 	sendemail($user, $friendsemails);
-	
 	$returnvals['sent'] = $sent;
+
 	if(!$sent)
 		$returnvals['message'] = "Error sending messages.  Please try again.";
-		
-	echo json_encode($returnvals);
-	
+
+		echo json_encode($returnvals);
+
+	if($pic=="true") {
+		header("Location: HomePage.php");
+	}
+
 	function sendemail($user,$friend){
 		$subject = 'Message received';
 		$emailmessage = $user ." has sent you a message on GhostTalk!\n\nVisit www.cise.ufl.edu/~cmoore/HomePage.php to view it.";
-		
 		for($i=0; $i<count($friend);++$i){
 			mail($friend[$i],$subject,$emailmessage);
 		}

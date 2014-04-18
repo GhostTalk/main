@@ -75,13 +75,13 @@
 					$('#friends').append(clone.clone());
 				});
 				
-				$('#sendButton').on('click', function() {
+				$('#sendButton').on('click', function(e) {
 					var comment = $.trim($('#message').val());
 					if(comment.length==0 && $('#message').is(":visible")) {
 						alert("Message field empty.");
 					} else if(!($('#picmessage').val()) && $('#picmessage').is(":visible")) {
 						alert("Picture not selected.");
-					} else {
+					} else if($('#message').is(":visible")){
 						$.ajax({
 							type		: "POST",
 							url			: "sendmessage.php",
@@ -95,9 +95,11 @@
 							} else
 								alert(data.message);
 						});
+						
+						e.preventDefault();
+						return false;
+					} else {
 					}
-					
-					return false;
 				});
 		
 				jQuery(document).ajaxComplete(function () {
@@ -128,10 +130,10 @@
 							open: function(event, ui) {
 								if(!(expires=='')) {
 									setTimeout("$('.dialog').dialog('close')", expires);
-									/**	
+									
 									var thisDialog = $(this);
 									var interval = setInterval(function() {
-										var timer = $('#time').html();
+										var timer = $(this).children('#time').html();
 										timer = timer.split(':');
 										var minutes = parseInt(timer[0], 10);
 										var seconds = parseInt(timer[1], 10);
@@ -145,14 +147,14 @@
 											seconds = 59;
 										} else if (seconds < 10 && length.seconds != 2)
 											seconds = '0' + seconds;
-										$('#time').html(minutes + ':' + seconds);
+										$(this).children('#time').html(minutes + ':' + seconds);
 		
 										if (minutes == 0 && seconds == 0){
 											thisDialog.dialog('close');
 											clearInterval(interval);
 										}
 									}, 1000);
-									**/
+									
 								}
 							},
 							
@@ -206,7 +208,7 @@
 					<div id = "tab1">
 					</div>
 					<div id = "tab2">
-						<form id="sendmessageform">
+						<form id="sendmessageform" action="sendmessage.php" method="POST" enctype="multipart/form-data">
 							<!--Dropdown menu for friends list-->
 							<div id="friends">
 								<p>Send To:</p>
@@ -241,7 +243,17 @@
 				</div>
 		</div>
 		<div class="alsofade">
-			<img id="f3" src="http://imgur.com/VJ6iKzk.jpg"	height="100px" width="100px">
+			<!--<img id="f3" src="http://imgur.com/VJ6iKzk.jpg"	height="100px" width="100px">-->
+			<script>
+					$.ajax({
+						url		: "get_user_pic.php",
+						dataType: "json"
+					})
+					
+					.done(function(pic) {
+						$('.alsofade').append(pic.tag);
+					});
+			</script>
 		</div>
 		<div id="accordian">
 			<ul>
@@ -293,7 +305,7 @@
 					</script>
 				</li>
 				<li>
-					<h3>Requests</h3>
+					<h3 id='requestpage'>Requests</h3>
 					<script>
 						$('#requestpage').on("click", function() {
 							window.location.href="Request.php";

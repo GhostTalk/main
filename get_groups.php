@@ -2,7 +2,7 @@
 
 <?php
 	session_start();
-	$query = sprintf("SELECT name FROM %s_groups WHERE name<>'Friends';",
+	$query = sprintf("SELECT DISTINCT ON (name) name FROM %s_groups WHERE name<>'Friends';",
 		$_SESSION['Username']);
 	$conn = pg_connect("host=postgres.cise.ufl.edu user=cmoore dbname=ghosttalk password=calvin#1");
 	

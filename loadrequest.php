@@ -1,10 +1,12 @@
+#!/usr/local/bin/php
+
 <?php
 
 	session_start();
 	$conn = pg_connect("host=postgres.cise.ufl.edu user=cmoore dbname=ghosttalk password=calvin#1");
 
 	$user = $_SESSION['Username'];
-	$query = sprintf("SELECT * FROM %s_requests_received ORDER BY postTime DESC",
+	$query = sprintf("SELECT * FROM %s_requests_received",
 		$user);
 	$result = pg_query($conn, $query);
 
