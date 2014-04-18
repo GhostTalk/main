@@ -112,6 +112,12 @@ h2 {
 	border: black solid 2px;
 	color:#BDBDBD;
 	font-family:Arial;
+	margin-top:1%;
+}
+
+.messagebox img{
+	margin-bottom:1%;
+	
 }
 
 .fadein {
