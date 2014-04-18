@@ -294,6 +294,11 @@
 				</li>
 				<li>
 					<h3>Requests</h3>
+					<script>
+						$('#requestpage').on("click", function() {
+							window.location.href="Request.php";
+						});
+					</script>
 				</li>
 			</ul>
 		</div>
