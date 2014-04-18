@@ -84,6 +84,11 @@
 						<label for="City">Current City: </label><input type="text" name="City" id="City">
 					</td>
 				</tr>
+				<tr>
+					<td>
+					<label for = "picture">Upload a Picture: </label>
+					</td>
+				</tr>
 			</table>
 			<button type="Submit" name="action">Submit</button>
 			</fieldset>
