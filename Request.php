@@ -110,6 +110,11 @@
 				</li>
 				<li>
 					<h3>Search</h3>
+					<script>
+						$('#searchpage').on("click", function() {
+							window.location.href="Search.php";
+						});
+					</script>
 				</li>
 				<li>
 					<h3>Requests</h3>
