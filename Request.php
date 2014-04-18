@@ -17,6 +17,19 @@
 				});
 				
 				
+					$.ajax({
+						url	: "loadrequest.php",
+						type	: "POST",
+						dataType: "json"
+					})
+				
+					.done(function(response){
+						$.each(response, function(index, value) {
+							$('#mainlist').append(value);
+						});
+					});
+				
+				
 					$('.accept').on('click',function(e){
 							var sentby = $(this).parent().find("#user").html();
 							$.ajax({
