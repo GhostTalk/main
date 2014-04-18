@@ -86,7 +86,7 @@
 				</tr>
 				<tr>
 					<td>
-					<label for = "picture">Upload a Picture: </label>
+					<label for = "picture">Upload a Picture: </label><input type = "text" name = "picture" id = "picture">
 					</td>
 				</tr>
 			</table>
