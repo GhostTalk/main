@@ -74,8 +74,6 @@
 			<div id="title">
 				<h1>REQUESTS</h1>
 			</div>
-			
-			</div>
 		</div>
 	</body>
 </html>
