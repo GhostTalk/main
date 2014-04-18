@@ -1,5 +1,14 @@
 #!/usr/local/bin/php
 
+<?php
+	session_start();
+	if(!isset($_SESSION['Username'])) {
+		echo '<script>window.location.href="http://cise.ufl.edu/~cmoore";</script>';
+		exit();
+	}
+?>
+		
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -24,6 +33,30 @@
 					$('#tab1').append(value);
 				});
 			});
+			
+			$.ajax({
+				url		: "loadlist.php",
+				type	: "POST",
+				dataType: "json"
+			})
+			
+			.done(function(response) {
+				$.each(response, function(index, value) {
+					$('#friendlist').append(value);
+				});
+			});
+			
+			$.ajax ({
+				url		: "outbox.php",
+				type	: "POST",
+				dataType: "json"
+			})
+			
+			.done(function(response) {
+				$.each(response, function(index, value) {
+					$('#tab3').append(value);
+				});
+			});
 		</script>
 		<script>
 			$(document).ready(function(){
@@ -35,8 +68,51 @@
 						$(this).next().slideDown();
 					}
 				});
+				
+				$('#addList').on('click', function(e) {
+					e.preventDefault();
+					var clone = $('#friendlist').clone();
+					$('#friends').append(clone.clone());
+				});
+				
+				$('#sendButton').on('click', function() {
+					var comment = $.trim($('#message').val());
+					if(comment.length==0 && $('#message').is(":visible")) {
+						alert("Message field empty.");
+					} else if(!($('#picmessage').val()) && $('#picmessage').is(":visible")) {
+						alert("Picture not selected.");
+					} else {
+						$.ajax({
+							type		: "POST",
+							url			: "sendmessage.php",
+							data		: $('#sendmessageform').serialize(),
+							dataType	: 'json'
+						})
+						.done(function(data) {
+							if(data.sent) {
+								alert("Message sent!");
+								window.location.href="HomePage.php";
+							} else
+								alert(data.message);
+						});
+					}
+					
+					return false;
+				});
 		
 				jQuery(document).ajaxComplete(function () {
+					$('.picture').on("click", function(e) {
+						if(e.target.id == "picturet") {
+							$('#message').hide();
+							$('#picmessage').show();
+							$('#filelabel').show();
+						} else {
+							$('#picmessage').hide();
+							$('#filelabel').hide();
+							$('#message').show();
+						}
+					});
+					
 					$(".messagebox").click(function(e) {
 						var box = $(this);
 						var sentBy = $(this).find("#sender").html();
@@ -52,14 +128,31 @@
 							open: function(event, ui) {
 								if(!(expires=='')) {
 									setTimeout("$('.dialog').dialog('close')", expires);
-								
-									//var timer = expires;
-									//setInterval(function() {
-									//	if(timer < expires)
-									//		$(this).find('#timer').empty();
-									//	$(this).html(timer);
-									//	timer--;
-									//}, 1000);
+									/**	
+									var thisDialog = $(this);
+									var interval = setInterval(function() {
+										var timer = $('#time').html();
+										timer = timer.split(':');
+										var minutes = parseInt(timer[0], 10);
+										var seconds = parseInt(timer[1], 10);
+										seconds -= 1;
+										if (minutes < 0)
+											return clearInterval(interval);
+										if (minutes < 10 && minutes.length != 2)
+											minutes = '0' + minutes;
+										if (seconds < 0 && minutes != 0) {
+											minutes -= 1;
+											seconds = 59;
+										} else if (seconds < 10 && length.seconds != 2)
+											seconds = '0' + seconds;
+										$('#time').html(minutes + ':' + seconds);
+		
+										if (minutes == 0 && seconds == 0){
+											thisDialog.dialog('close');
+											clearInterval(interval);
+										}
+									}, 1000);
+									**/
 								}
 							},
 							
@@ -100,31 +193,50 @@
 		</script>
 	</head>
 	<body>
-		<?php
-			session_start();
-			if(!isset($_SESSION['Username'])) {
-				echo '<script>window.location.href="http://cise.ufl.edu/~cmoore";</script>';
-				exit();
-			}
-		?>
-		
 		<div id ="header">
 			<img src = "http://i.imgur.com/ASTbZIp.png" width="50%" height="130px">
 		</div>
 		<div id="tabs">
 				<ul>
-					<li><a href="#tab1">Inbox</a></li>
-					<li><a href="#tab2">Send</a></li>
-					<li><a href="#tab3">Sent</a></li>
+					<li><a href="#tab1"><span class="icon-envelope"></span>Inbox</a></li>
+					<li><a href="#tab2"><span class ="icon-mail-forward"></span>Send</a></li>
+					<li><a href="#tab3"><span class ="icon-folder-open"></span>Sent</a></li>
 				</ul>
 				<div id = "right" style="overflow:auto">
 					<div id = "tab1">
 					</div>
 					<div id = "tab2">
-						<p>NO YOU</p>
+						<form id="sendmessageform">
+							<!--Dropdown menu for friends list-->
+							<div id="friends">
+								<p>Send To:</p>
+								<select id="friendlist" name="friendlist[]">
+								</select>
+							</div>
+							<button type="button" id="addList">+</button>
+							<br />
+							<!--Dropdown menu for expiraion time-->
+							<label for="expiration">Expiration Time: </label>
+							<select id="expiration" name="expiration">
+								<option value="0">No expiration</option>
+								<option value="10000">10 seconds</option>
+								<option value="30000">30 seconds</option>
+								<option value="60000">60 seconds</option>
+							</select>
+							<br />
+							<input type="radio" id="picturef" class="picture" name="picture" value="false" checked>Post</input>
+							<input type="radio" id="picturet" class="picture" name="picture" value="true">Picture</input>
+							<!--Body for the message-->
+							<br>
+							</br>
+							<div id='messagebox'>
+								<textarea id="message" rows="10" cols="60" name="message"></textarea>
+								<label for='picmessage' id='filelabel' style="display:none">File: </label><input type='file' style="display:none" id='picmessage' name="picmessage"></input>
+							</div>
+							<button id="sendButton">Send</button>
+						</form>
 					</div>
 					<div id = "tab3">
-						<p>Getting real tired of your shit html</p>
 					</div>
 				</div>
 		</div>
@@ -185,12 +297,12 @@
 				</li>
 			</ul>
 		</div>
-		<div class="fadein">
+		<!--<div class="fadein">
     
 			<img id="f1" src="http://imgur.com/VJ6iKzk.jpg"	height="150px" width="150px">
     
 			<img id="f2" src="http://imgur.com/vcNd1PS.jpg" height="150px" width="150px">
 
-		</div>
+		</div>-->
 	</body>
 </html>
