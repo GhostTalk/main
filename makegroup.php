@@ -1,8 +1,11 @@
+#!/usr/local/bin/php
+
 <?php
 	session_start();
 	$user = $_SESSION['Username'];
 	$friend = array();
 	$friend = $_POST['friendlist'];
+	$groupname = $_POST['groupName'];
 	$conn = pg_connect("host=postgres.cise.ufl.edu user=cmoore dbname=ghosttalk password=calvin#1");
 	$counter = 0;
 	while($counter < count($friend)){
