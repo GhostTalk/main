@@ -15,7 +15,7 @@
 	}
 	
 	function validate_username($username) {
-		$query = sprintf("SELECT username FROM GTUser WHERE username='%s'",
+		$query = sprintf("SELECT username FROM GTUser WHERE username ILIKE '%s'",
 			pg_escape_string($_POST['Username']));
 		$conn = pg_connect('host=postgres.cise.ufl.edu user=cmoore password=calvin#1 dbname=ghosttalk');
 
