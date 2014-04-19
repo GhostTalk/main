@@ -74,9 +74,12 @@
 					var comment = $.trim($('#message').val());
 					if(comment.length==0 && $('#message').is(":visible")) {
 						alert("Message field empty.");
+						e.preventDefault();
+						return;
 					} else if(!($('#picmessage').val()) && $('#picmessage').is(":visible")) {
 						alert("Picture not selected.");
-					} else if($('#message').is(":visible")){
+						e.preventDefault();
+					} else if(comment.length > 0 && $('#message').is(":visible")){
 						$.ajax({
 							type		: "POST",
 							url			: "sendmessage.php",
