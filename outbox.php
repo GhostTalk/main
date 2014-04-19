@@ -14,8 +14,12 @@
 
 	//Loop through all rows in query and echo their values into the inbox div
 	while($row = pg_fetch_assoc($result)) {
-	$message[$counter] = "<div class='messagebox'><img class='save' src='http://icons.iconarchive.com/icons/cornmanthe3rd/plex/512/Communication-gmail-icon.png' width='100' height='100'><p id='sender'>".$row['creatorusername']."</p><p id='posttime'>".substr($row['posttime'], 0, 16)."</p><p id='postt' style='display:none'>".$row['posttime']."</p><p id='expirationtime' style='display:none'>".$row['expirationtime']."</p><div class ='dialog' style='display:none'><div id='timer'><p></p></div>".$row['body']."</div></div>";
-	$counter++;
+		$expires = $row['expiration']/1000;
+		if($row['pic'] == "f")
+			$message[$counter] = "<div class='sentbox'><img class='save' src='".$row['picture']."' width='100' height='100'><p id='sender'>".$row['receiverusername']."</p><p id='posttime'>".substr($row['posttime'], 0, 16)."</p><p id='expirationtime'>".$expires."</p><div class ='dialog'>".$row['body']."</div></div>";
+		else
+			$message[$counter] = "<div class='sentbox'><img class='save' src='".$row['picture']."' width='100' height='100'><p id='sender'>".$row['receiverusername']."</p><p id='posttime'>".substr($row['posttime'], 0, 16)."</p><p id='expirationtime'>".$expires."</p><div class ='dialog'><img src='".$row['body']."' height='50' width='50'></div></div>";
+		$counter++;
 	}
 
 	echo json_encode($message);
