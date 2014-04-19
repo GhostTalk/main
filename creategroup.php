@@ -84,6 +84,18 @@
 			<div id="title">
 				<h1>CREATE GROUP</h1>
 			</div>
+			
+			<form id="groupform">
+				<label for="groupName">Group Name:</label>
+				<input id="groupName" type="text" name="groupName">
+				<p>Members:</p>
+					<select class="friendlist" multiple>
+						<option value="friend1">friend1</option>
+						<option value="friend2">friend2</option>
+						<option value="friend3">friend3</option>
+					</select>
+				<button id="createGroup">Create Group</button>
+			</form>
 		</div>
 	</body>
 </html>
