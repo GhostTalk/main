@@ -17,50 +17,9 @@
 				});
 				
 				
-					$.ajax({
-						url	: "loadrequest.php",
-						type	: "POST",
-						dataType: "json"
-					})
-				
-					.done(function(response){
-						$.each(response, function(index, value) {
-							$('#mainlist').append(value);
-						});
-					});
 				
 				
-					$('.accept').on('click',function(e){
-							var sentby = $(this).parent().find("#user").html();
-							$.ajax({
-							type     : 'POST',
-							url      : 'acceptrequest.php',
-							data     : {sender : sentby},
-							success: function(message) { 
-									alert(message);
-							}
-							})
-							var thisDiv = $(this).parent().closest('div');
-							$(thisDiv).remove();
-
-					});
-					
-					
-						$('.decline').on('click',function(e){
-							var sentby = $(this).parent().find("#user").html();
-							$.ajax({
-							type     : 'POST',
-							url      : 'deleterequest.php',
-							data     : 	{sender : sentby},
-							success: function(message) { 
-									alert(message);
-							}
-							})
-							var thisDiv = $(this).parent().closest('div');
-							$(thisDiv).remove();
-
-					});
-					
+				
 			});
 		</script>
 	</head>
