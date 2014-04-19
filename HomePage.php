@@ -69,11 +69,6 @@
 					}
 				});
 				
-				$('#addList').on('click', function(e) {
-					e.preventDefault();
-					var clone = $('#friendlist').clone();
-					$('#friends').append(clone.clone());
-				});
 				
 				$('#sendButton').on('click', function(e) {
 					var comment = $.trim($('#message').val());
@@ -212,10 +207,9 @@
 							<!--Dropdown menu for friends list-->
 							<div id="friends">
 								<p>Send To:</p>
-								<select id="friendlist" name="friendlist[]">
+								<select id="friendlist" name="friendlist[]" multiple>
 								</select>
 							</div>
-							<button type="button" id="addList">+</button>
 							<br />
 							<!--Dropdown menu for expiraion time-->
 							<label for="expiration">Expiration Time: </label>
@@ -261,7 +255,12 @@
 					<h3>Home</h3>
 				</li>
 				<li>
-					<h3>Friends List</h3>
+					<h3 id='friendpage'>Friends List</h3>
+					<script>
+						$('#friendpage').on("click", function(e) {
+							window.location.href="Friends.php";
+						});
+					</script>
 				</li>
 				<li>
 					<h3 id="Groups">Groups</h3>
@@ -283,7 +282,8 @@
 										
 										var counter=0;
 										jQuery.each(result, function(index, value) {
-											jQuery('#GroupsList').append("<li>" + value.name + "</li>");
+											//jQuery('#GroupsList').append("<li>" + value.name + "</li>");
+											jQuery('#GroupsList').append("<li></li><a href=\"group.php?group='" + value.name + "'\">"+value.name+"</a></a></li>");
 										});
 									})
 									
@@ -309,6 +309,27 @@
 					<script>
 						$('#requestpage').on("click", function() {
 							window.location.href="Request.php";
+						});
+					</script>
+				</li>
+				<li>
+					<h3 id='creategroup'>Create Group</h3>
+					<script>
+						$('#creategroup').on("click", function() {
+							window.location.href="creategroup.php";
+						});
+					</script>
+				</li>
+				<li>
+					<h3 id='logout'>Logout</h3>
+					<script>
+						$('#logout').on("click", function() {
+							$.ajax({
+								url	: 'logout.php'
+							})
+							.done(function() {
+								window.location.href="http://www.cise.ufl.edu/~cmoore";
+							});
 						});
 					</script>
 				</li>
