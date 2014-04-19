@@ -16,6 +16,22 @@
 					}
 				});
 				
+				$('#createGroup').on('click', function(e){
+					var name = $('#groupName').val();
+					if(name.length == 0){
+						alert('Group name has not been entered');
+					}
+					else{
+						$.ajax({
+							type     : 'POST',
+							url   	 : 'makegroup.php',
+							data  	 : $('#groupform').serialize()
+							dataType : 'json'
+							})
+					}
+						e.preventDefault();
+						return false;
+				});
 				
 				
 				
