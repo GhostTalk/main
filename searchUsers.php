@@ -79,7 +79,7 @@
 		if($result) {
 			$counter = 0;
 			while($row = pg_fetch_assoc($result)) {
-				$results[$counter] = "<div class='searchresults".$counter."'><img src='' width='100' height='100'><p id='un'>".$row['username']."</p><p id='n'>".$row['firstname']." ".$row['lastname']."</p><p id='cc'>".$row['currentcity']."</p><p id='bd'>".$row['bdate']."</p><button type='Submit' id=$counter class='request'>Request Friendship</button></div>";
+				$results[$counter] = "<div class='searchresults".$counter."'><img src='".$row['picture']."' width='100' height='100'><p id='un'>".$row['username']."</p><p id='n'>".$row['firstname']." ".$row['lastname']."</p><p id='cc'>".$row['currentcity']."</p><p id='bd'>".$row['bdate']."</p><button type='Submit' id=$counter class='request'>Request Friendship</button></div>";
 				$counter++;
 			}
 		} else {
