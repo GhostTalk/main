@@ -1,5 +1,13 @@
 #!/usr/local/bin/php
 
+<?php
+	session_start();
+	if(!isset($_SESSION['Username'])) {
+		echo '<script>window.location.href="http://cise.ufl.edu/~cmoore";</script>';
+		exit();
+	}
+?>
+	
 <!DOCTYPE html>
 <html>
 	<head>
