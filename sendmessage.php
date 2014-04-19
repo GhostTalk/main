@@ -20,10 +20,11 @@
 	if($expiration==0)
 		$expiration = 'NULL';
 
-		if($pic=="false") {
+	if($pic=="false") {
 		$message = $_POST['message'];
 	} else {
 		$target_path = "Pictures/$user/" . basename($_FILES['picmessage']['name']);
+		echo $target_path;
 		if(!is_dir("Pictures/$user")) {
 			$old = umask(0);
 			mkdir("Pictures/$user", 0777);
