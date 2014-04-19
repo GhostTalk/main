@@ -29,7 +29,7 @@
 						});
 					});
 				
-				
+				$(document).ajaxComplete(function(){
 					$('.accept').on('click',function(e){
 							var sentby = $(this).parent().find("#user").html();
 							$.ajax({
@@ -62,6 +62,7 @@
 					});
 					
 			});
+		});
 		</script>
 	</head>
 	<body>
@@ -76,11 +77,19 @@
 					</script>
 				</li>
 				<li>
-					<h3>Friends List</h3>
+					<h3 id='friendpage'>Friends List</h3>
+					<script>
+						$('#friendpage').on("click", function(e) {
+							window.location.href="Friends.php";
+						});
+					</script>
 				</li>
 				<li>
 					<h3 id="Groups">Groups</h3>
 					<ul id="GroupsList">
+						<!--<li><a href="#">School</a></li>
+						<li><a href="#">Work</a></li>
+						<li><a href="#">People</a></li>-->
 						<script>
 							jQuery(document).ready(function() {
 								jQuery("#Groups").on("click", function(e) {									
@@ -89,16 +98,17 @@
 										url			: 'get_groups.php',
 										dataType	: 'json'
 									})
-
+									
 									.done(function(result) {
 										jQuery('#GroupsList').empty();
-
+										
 										var counter=0;
 										jQuery.each(result, function(index, value) {
-											jQuery('#GroupsList').append(value.name);
+											//jQuery('#GroupsList').append("<li>" + value.name + "</li>");
+											jQuery('#GroupsList').append("<li></li><a href=\"group.php?group='" + value.name + "'\">"+value.name+"</a></a></li>");
 										});
 									})
-
+									
 									.fail(function() {
 										jQuery('#GroupsList').empty();
 										jQuery('#GroupsList').append('Error loading groups.');
@@ -109,7 +119,7 @@
 					</ul>
 				</li>
 				<li>
-					<h3>Search</h3>
+					<h3 id='searchpage'>Search</h3>
 					<script>
 						$('#searchpage').on("click", function() {
 							window.location.href="Search.php";
@@ -117,7 +127,33 @@
 					</script>
 				</li>
 				<li>
-					<h3>Requests</h3>
+					<h3 id='requestpage'>Requests</h3>
+					<script>
+						$('#requestpage').on("click", function() {
+							window.location.href="Request.php";
+						});
+					</script>
+				</li>
+				<li>
+					<h3 id='creategroup'>Create Group</h3>
+					<script>
+						$('#creategroup').on("click", function() {
+							window.location.href="creategroup.php";
+						});
+					</script>
+				</li>
+				<li>
+					<h3 id='logout'>Logout</h3>
+					<script>
+						$('#logout').on("click", function() {
+							$.ajax({
+								url	: 'logout.php'
+							})
+							.done(function() {
+								window.location.href="http://www.cise.ufl.edu/~cmoore";
+							});
+						});
+					</script>
 				</li>
 			</ul>
 		</div>

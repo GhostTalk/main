@@ -6,6 +6,19 @@
 		<link rel='stylesheet' href='Request.css'/>
 		<script src="http://thecodeplayer.com/uploads/js/prefixfree-1.0.7.js" type="text/javascript" type="text/javascript"></script>
 		<script src="http://thecodeplayer.com/uploads/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+		
+		<script>
+				$.ajax({
+				url		: "loadlist.php",
+				dataType: "json"
+			})
+			.done(function(response) {
+				$.each(response, function(index, value) {
+					$('#friendlist').append(value);
+				});
+			});
+			
+		</script>
 		<script>
 			$(document).ready(function(){
 				$("#accordian h3").click(function(){
@@ -15,6 +28,7 @@
 						$(this).next().slideDown();
 					}
 				});
+		
 				
 				$('#createGroup').on('click', function(e){
 					var name = $('#groupName').val();
@@ -25,12 +39,11 @@
 						$.ajax({
 							type     : 'POST',
 							url   	 : 'makegroup.php',
-							data  	 : $('#groupform').serialize()
+							data  	 : $('#groupform').serialize(),
 							dataType : 'json'
-							})
+							});
+					
 					}
-						e.preventDefault();
-						return false;
 				});
 				
 				
@@ -51,7 +64,12 @@
 					</script>
 				</li>
 				<li>
-					<h3>Friends List</h3>
+					<h3 id='friendpage'>Friends List</h3>
+					<script>
+						$('#friendpage').on("click", function(e) {
+							window.location.href="Friends.php";
+						});
+					</script>
 				</li>
 				<li>
 					<h3 id="Groups">Groups</h3>
@@ -84,7 +102,7 @@
 					</ul>
 				</li>
 				<li>
-					<h3>Search</h3>
+					<h3 id='searchpage'>Search</h3>
 					<script>
 						$('#searchpage').on("click", function() {
 							window.location.href="Search.php";
@@ -92,7 +110,33 @@
 					</script>
 				</li>
 				<li>
-					<h3>Requests</h3>
+					<h3 id='requestpage'>Requests</h3>
+					<script>
+						$('#requestpage').on("click", function() {
+							window.location.href="Request.php";
+						});
+					</script>
+				</li>
+				<li>
+					<h3 id='creategroup'>Create Group</h3>
+					<script>
+						$('#creategroup').on("click", function() {
+							window.location.href="creategroup.php";
+						});
+					</script>
+				</li>
+				<li>
+					<h3 id='logout'>Logout</h3>
+					<script>
+						$('#logout').on("click", function() {
+							$.ajax({
+								url	: 'logout.php'
+							})
+							.done(function() {
+								window.location.href="http://www.cise.ufl.edu/~cmoore";
+							});
+						});
+					</script>
 				</li>
 			</ul>
 		</div>
@@ -101,14 +145,11 @@
 				<h1>CREATE GROUP</h1>
 			</div>
 			
-			<form id="groupform">
+			<form id="groupform" method="POST">
 				<label for="groupName">Group Name:</label>
 				<input id="groupName" type="text" name="groupName">
 				<p>Members:</p>
-					<select class="friendlist" multiple>
-						<option value="friend1">friend1</option>
-						<option value="friend2">friend2</option>
-						<option value="friend3">friend3</option>
+					<select id="friendlist" name="friendlist[]" multiple>
 					</select>
 				<button id="createGroup">Create Group</button>
 			</form>

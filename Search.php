@@ -30,7 +30,12 @@
 					</script>
 				</li>
 				<li>
-					<h3>Friends List</h3>
+					<h3 id='friendpage'>Friends List</h3>
+					<script>
+						$('#friendpage').on("click", function(e) {
+							window.location.href="Friends.php";
+						});
+					</script>
 				</li>
 				<li>
 					<h3 id="Groups">Groups</h3>
@@ -66,7 +71,33 @@
 					<h3>Search</h3>
 				</li>
 				<li>
-					<h3>Requests</h3>
+					<h3 id='requestpage'>Requests</h3>
+					<script>
+						$('#requestpage').on("click", function() {
+							window.location.href="Request.php";
+						});
+					</script>
+				</li>
+				<li>
+					<h3 id='creategroup'>Create Group</h3>
+					<script>
+						$('#creategroup').on("click", function() {
+							window.location.href="creategroup.php";
+						});
+					</script>
+				</li>
+				<li>
+					<h3 id='logout'>Logout</h3>
+					<script>
+						$('#logout').on("click", function() {
+							$.ajax({
+								url	: 'logout.php'
+							})
+							.done(function() {
+								window.location.href="http://www.cise.ufl.edu/~cmoore";
+							});
+						});
+					</script>
 				</li>
 			</ul>
 		</div>
