@@ -12,11 +12,13 @@
 			if(isset($_GET['error'])) {
 				if($_GET['error'] === 'connection')
 					echo "<p>There was an error connecting to the server.  Please try again.</p>";
+				else if($_GET['error'] === 'picture')
+					echo "<p>There was an error uploading your picture.  Please try again.</p>";
 				else
 					echo "<p>Could not create user account.<br>Error: ".$_GET['error']."</p><p>Please try again.</p>";
 			}
 		?>
-		<form id="signupform">
+		<form id="signupform" action="upload_picture.php" method="POST" enctype="multipart/form-data">
 		<div id = "required">
 		<fieldset>
 			<table>
@@ -103,7 +105,8 @@
 						type   		: 'POST',
 						url	   		: 'process.php',
 						data   		: $('#signupform').serialize(),
-						dataType 	: 'json'
+						dataType 	: 'json',
+						async		: false
 					})
 		
 					.done(function(data){
@@ -112,55 +115,75 @@
 						if(!data.success){
 							if(data.errors.Username){
 								$('#UsernameErr').append(data.errors.Username);
+								if(!e.isDefaultPrevented())
+									e.preventDefault();
 							}
 								
 							if(data.errors.Email){
 								$('#EmailErr').append(data.errors.Email);
+								if(!e.isDefaultPrevented())
+									e.preventDefault();
 							}
 									
 							if(data.errors.Password){
 								$('#PasswordErr').append(data.errors.Password);
+								if(!e.isDefaultPrevented())
+									e.preventDefault();
 							}
 									
 							if(data.errors.passwordMatch){
 								$('#RPasswordErr').append(data.errors.passwordMatch);
+								if(!e.isDefaultPrevented())
+									e.preventDefault();
 							}
 									
 							if(data.errors.First){
 								$('#FirstErr').append(data.errors.First);
+								if(!e.isDefaultPrevented())
+									e.preventDefault();
 							}
 									
 							if(data.errors.Last){
 								$('#LastErr').append(data.errors.Last);
+								if(!e.isDefaultPrevented())
+									e.preventDefault();
 							}
 									
 							if(data.errors.gender){
 								$('#genderErr').append(data.errors.gender);
+								if(!e.isDefaultPrevented())
+									e.preventDefault();
 							}
 						} else {
 							$.ajax({
 								type   		: 'POST',
 								url	   		: 'create_account.php',
 								data   		: $('#signupform').serialize(),
-								dataType 	: 'json'
+								dataType 	: 'json',
+								async		: false
 							})
 							
-							.done(function(status) {
-								window.location.href = status.Redirect;
-							})
+							//.done(function(status) {
+							//	window.location.href = status.Redirect;
+							//})
+							//.done(function(status) {
+							//	$('#signupform').off('submit');
+							//	$('#signupform').sumbit();
+							//})
 							.fail(function(status) {
+								if(!e.isDefaultPrevented())
+									e.preventDefault();
 								window.location.href = status.Redirect;
 							});
 						}
 					})
 		
 					.fail(function(data){
+						if(!e.isDefaultPrevented())
+							e.preventDefault();
 						alert("Error!");
 						//window.location.href = 'http://cise.ufl.edu/~cmoore/signup.php?error=connection';
 					});
-				
-					e.preventDefault();
-
 				});
 			});
 		</script>
