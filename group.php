@@ -24,6 +24,45 @@
 					}
 				});
 			});
+			
+			
+			
+				$(document).ready(function() {
+					$.ajax({
+						url : "loadlist.php",
+						type : "POST",
+						dataType: "json"
+					})
+					.done(function(response) {
+						$.each(response, function(index, value) {
+						$('#friendlist').append(value);
+						});
+					});
+						
+					var data = {group : <?php echo $_GET['group']; ?>};
+					$('#addMember').on('click', function(e) {
+						alert('hello');
+						$.ajax({
+							type		: "POST",
+							url			: "addmember.php",
+							data		: {$('#memberList').serialize(), data},
+							dataType	: 'json'
+						})
+					});
+					
+				
+					$('.removeMember').on('click', function(e) {
+					var member = $(this).closest("#groupmember").html();
+						$.ajax({
+							type		: "POST",
+							url			: "removemember.php",
+							data		: {member, data},
+							dataType	: 'json'
+						})
+					
+						
+					});
+				});
 		</script>
 	</head>
 	<body>
@@ -137,6 +176,14 @@
 					});
 					
 				</script>
+				<p>Add Friends</p>
+				<form id="memberList">
+					<select class="friendlist" multiple>
+								
+					</select>
+					<button id="addMember">Add</button>
+				
+				</form>
 			</div>
 		
 		</div>
