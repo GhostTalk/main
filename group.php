@@ -52,7 +52,7 @@
 					
 				
 					$('.removeMember').on('click', function(e) {
-					var member = $(this).closest("#groupmember").html();
+					var member = $(this).closest("#mem").html();
 						$.ajax({
 							type		: "POST",
 							url		: "removemember.php",
