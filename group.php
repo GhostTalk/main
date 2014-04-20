@@ -39,13 +39,15 @@
 						});
 					});
 						
-					var data = {group : <?php echo $_GET['group']; ?>};
+				
+	
 					$('#addMember').on('click', function(e) {
-						alert('hello');
+					var gdata = $('#memberList').serialize()
+					gdata['group'] = <?php echo $_GET['group']; ?>;
 						$.ajax({
 							type		: "POST",
 							url		: "addmember.php",
-							data		: {$('#memberList').serialize(), data},
+							data		:  gdata,
 							dataType	: 'json'
 						})
 					});
