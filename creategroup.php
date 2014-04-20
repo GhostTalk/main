@@ -37,21 +37,27 @@
 					}
 				});
 		
-				
-				$('#createGroup').on('click', function(e){
-					var name = $('#groupName').val();
-					if(name.length == 0){
-						alert('Group name has not been entered');
-					}
-					else{
-						$.ajax({
-							type     : 'POST',
-							url   	 : 'makegroup.php',
-							data  	 : $('#groupform').serialize(),
-							dataType : 'json'
+				$(document).ajaxComplete(function() {
+					$('#groupform').on('submit', function(e){
+						var name = $('#groupName').val();
+						if(name.length == 0){
+							alert('Group name has not been entered');
+						}
+						else{
+							$.ajax({
+								type     : 'POST',
+								url   	 : 'makegroup.php',
+								data  	 : $('#groupform').serialize(),
+								dataType : 'json'
+							})
+							.done(function() {
+								alert("Group created.");
+							})
+							.fail(function() {
+								alert("Error creating group.");
 							});
-					
-					}
+						}
+					});
 				});
 				
 				
@@ -155,11 +161,11 @@
 			
 			<form id="groupform" method="POST">
 				<label for="groupName">Group Name:</label>
-				<input id="groupName" type="text" name="groupName">
-				<p>Members:</p>
+				<input id="groupName" type="text" name="groupName"><br />
+				<label for='friendlist'>Members:</label><br />
 					<select id="friendlist" name="friendlist[]" multiple>
-					</select>
-				<button id="createGroup">Create Group</button>
+					</select><br />
+				<button type='submit' id="createbutton">Create Group</button>
 			</form>
 		</div>
 	</body>
