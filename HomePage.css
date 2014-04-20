@@ -206,3 +206,28 @@ h2 {
     -webkit-animation-delay: -2s;
     -moz-animation-delay:-2s;
 }
+
+.sentbox{
+	border: black solid 2px;
+	color:#BDBDBD;
+	font-family:Arial;
+	margin-top:1%;
+}
+
+.sentbox img{
+	margin-bottom:1%;
+	margin-left:1%;
+	
+}
+
+.sentbox #sender{
+    position:absolute;
+    left:93%;
+    margin-top:-7.5%;
+}
+
+.sentbox #posttime {
+    position:absolute;
+    left:87.5%;
+    margin-top:-6.5%
+}
