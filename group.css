@@ -1,0 +1,84 @@
+* {margin: 0; padding: 0;}
+#accordian {
+	font-family:Arial;
+    position:absolute;
+	background: #EBEBEB;
+	width: 200px;
+	margin-top:17%;
+	margin-left:2%;
+	color: white;
+	/*Some cool shadow and glow effect*/
+	box-shadow: 
+		0 5px 10px 1px rgba(0, 0, 0, 0.6), 
+		0 0 200px 1px rgba(255, 255, 255, 5);
+}
+/*heading styles*/
+#accordian h3 {
+	font-size: 12px;
+	line-height: 34px;
+	padding: 0 10px;
+	cursor: pointer;
+	/*fallback for browsers not supporting gradients*/
+	background: #003040; 
+	background: linear-gradient(#AA1111, #000000);
+}
+/*heading hover effect*/
+#accordian h3:hover {
+	text-shadow: 0 0 1px rgba(255, 255, 255, 0.7);
+}
+/*list items*/
+#accordian li {
+	list-style-type: none;
+}
+/*links*/
+#GroupsList {
+	color:black;
+	text-decoration: none;
+	font-size: 11px;
+	line-height: 27px;
+	display: block;
+	padding: 0 15px;
+	/*transition for smooth hover animation*/
+	transition: all 0.15s;
+}
+/*hover effect on links*/
+#GroupsList:hover {
+	background: linear-gradient(#AA1111, #EBEBEB);
+	border-left: 5px solid black;
+}
+/*hides the non active LIs by default*/
+#accordian ul ul {
+	display: none;
+}
+body {
+    background-color:black;
+}
+#mainlist {
+    position:absolute;
+    border:2px solid white;
+    height:80%;
+    width:80%;
+    left:15%;
+    right;
+    top:10%;
+	color:white;
+}
+#title {
+    border:2px solid white;
+    position:relative;
+    height:10%;
+    color:white;
+    text-align:center;
+}
+
+.grouplist {
+    text-align:center;
+    color:white;
+    border: solid 2px white;
+    box-shadow: 
+		0 15px 10px 0px rgba(0, 0, 0, 0.6), 
+		0 0 150px 1px rgba(255, 255, 255, 5);
+    width:50%;
+    margin-left:auto;
+    margin-right:auto;
+}
