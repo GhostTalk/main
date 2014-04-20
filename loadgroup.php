@@ -15,7 +15,7 @@
 	$counter = 0;
 	
 	while($row = pg_fetch_assoc($result)) {
-		$list[$counter] = "<div>".$row['memberusername']."</div>";
+		$list[$counter] = "<div id="groupmember">".$row['memberusername']."<button class"removemember">Remove</button></div>";
 		$counter++;
 	}
 
