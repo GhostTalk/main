@@ -44,7 +44,7 @@
 						alert('hello');
 						$.ajax({
 							type		: "POST",
-							url			: "addmember.php",
+							url		: "addmember.php",
 							data		: {$('#memberList').serialize(), data},
 							dataType	: 'json'
 						})
@@ -55,8 +55,8 @@
 					var member = $(this).closest("#groupmember").html();
 						$.ajax({
 							type		: "POST",
-							url			: "removemember.php",
-							data		: {member, data},
+							url		: "removemember.php",
+							data		: {member : member, data},
 							dataType	: 'json'
 						})
 					
