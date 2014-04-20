@@ -53,10 +53,11 @@
 				
 					$('.removeMember').on('click', function(e) {
 					var member = $(this).closest("#mem").html();
+					var groupdata = {group : <?php echo $_GET['group']; ?>, member : member};
 						$.ajax({
 							type		: "POST",
 							url		: "removemember.php",
-							data		: {member : member, data},
+							data		:  groupdata,
 							dataType	: 'json'
 						})
 					
