@@ -22,17 +22,20 @@
 		<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
 		<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 		<script>
-			$.ajax({
-				url		: "inbox.php",
-				type	: "POST",
-				dataType: "json"
-			})
-				
-			.done(function(response){
-				$.each(response, function(index, value) {
-					$('#tab1').append(value);
+			setInterval(function() {
+				$.ajax({
+					url		: "inbox.php",
+					type	: "POST",
+					dataType: "json"
+				})
+
+				.done(function(response){
+					$('#tab1').empty();
+					$.each(response, function(index, value) {
+						$('#tab1').append(value);
+					});
 				});
-			});
+			}, 1000*60*2);
 			
 			$.ajax({
 				url		: "loadlist.php",
@@ -270,7 +273,27 @@
 		<div id="accordian">
 			<ul>
 				<li>
-					<h3>Home</h3>
+					<h3 id='homeElement'>Home</h3>
+					<script>
+						$('#homeElement').on("click", function(e) {
+							window.location.href="HomePage.php";
+						});
+					</script>
+					<script>
+						setInterval(function() {
+							$.ajax({
+								url		: "count_messages.php",
+								dataType: "json"
+							})
+						
+							.done(function(data) {
+								if(!(data.mess_count == 0)) {
+									$('#mess_count').remove();
+									$('#homeElement').append("<div id='mess_count'> " + data.mess_count + "</div>");
+								}
+							});
+						}, 1000*60*5);
+					</script>
 				</li>
 				<li>
 					<h3 id='friendpage'>Friends List</h3>
@@ -301,7 +324,7 @@
 										var counter=0;
 										jQuery.each(result, function(index, value) {
 											//jQuery('#GroupsList').append("<li>" + value.name + "</li>");
-											jQuery('#GroupsList').append("<li></li><a href=\"group.php?group='" + value.name + "'\">"+value.name+"</a></a></li>");
+											jQuery('#GroupsList').append("<li><a href=\"group.php?group=" + value.name + "\">"+value.name+"</a></li>");
 										});
 									})
 									
@@ -327,6 +350,17 @@
 					<script>
 						$('#requestpage').on("click", function() {
 							window.location.href="Request.php";
+						});
+					</script>
+					<script>
+						$.ajax({
+							url		: "count_requests.php",
+							dataType: "json"
+						})
+						
+						.done(function(data) {
+							if(!(data.count_requ == 0))
+								$('#requestpage').append("<div id='count_requ'> " + data.count_requ + "</div>");
 						});
 					</script>
 				</li>
