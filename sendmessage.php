@@ -1,10 +1,14 @@
 #!/usr/local/bin/php
 <?php
+	$conn = pg_connect("host=postgres.cise.ufl.edu user=cmoore dbname=ghosttalk password=calvin#1");
+	
 	session_start();
+	
 	$user = $_SESSION['Username'];
 	$returnvals = array();
 	$sent = true;
 	$friend = array();
+	$group = array();
 
 	$friend = $_POST['friendlist'];
 	if(count($friend) !== count(array_unique($friend))) {
@@ -12,6 +16,24 @@
 		$returnvals['message'] = "One or more users are repeated.  Choose different users.";
 		echo json_encode($returnvals);
 		return;
+	}
+	
+	$group = $_POST['grouplist'];
+	$counter = 0;
+	$t = count($group);
+	while($counter < count($group)) {
+		$query = sprintf("SELECT username FROM %s_groups WHERE name='%s'",
+			$_SESSION['Username'],
+			pg_escape_string($group[$counter]));
+		
+		$result = pg_query($conn, $query);
+		
+		while($row = pg_fetch_assoc($result)) {
+			$friend[$t] = $row['username'];
+			$t++;
+		}
+		
+		$counter++;
 	}
 
 	$pic = $_POST['picture'];
@@ -47,8 +69,6 @@
 	}
 
 	$date = date('Y-m-d H:i:s T');
-
-	$conn = pg_connect("host=postgres.cise.ufl.edu user=cmoore dbname=ghosttalk password=calvin#1");
 
 	$counter=0;
 	while($counter < count($friend)) {
