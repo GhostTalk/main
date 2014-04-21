@@ -46,6 +46,18 @@
 				});
 			});
 			
+			$.ajax({
+				url	: "loadgrouplist.php",
+				type	: "POST",
+				dataType: "json"
+			})
+			
+			.done(function(response) {
+				$.each(response, function(index, value) {
+					$('#grouplist').append(value);
+				});
+			});
+			
 			$.ajax ({
 				url		: "outbox.php",
 				type	: "POST",
@@ -211,6 +223,9 @@
 							<div id="friends">
 								<p>Send To:</p>
 								<select id="friendlist" name="friendlist[]" multiple>
+								</select>
+								<P>Groups to send:</p>
+								<select id = "grouplist" name="grouplist[]" multiple>
 								</select>
 							</div>
 							<br />
