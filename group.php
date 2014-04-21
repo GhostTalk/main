@@ -25,58 +25,93 @@
 				});
 			});
 			
+			$.ajax({
+				url : "loadlist.php",
+				type : "POST",
+				dataType: "json"
+			})
+			.done(function(response) {
+				$.each(response, function(index, value) {
+					$('#friendlist').append(value);
+				});
+			});
 			
-			
-				$(document).ready(function() {
-					$.ajax({
-						url : "loadlist.php",
-						type : "POST",
-						dataType: "json"
-					})
-					.done(function(response) {
-						$.each(response, function(index, value) {
-						$('#friendlist').append(value);
+			$(document).ready(function() {
+				$(document).ajaxComplete(function() {
+					$('#addMember').on('click', function(e) {
+						e.preventDefault();
+						//var group = <?php echo $_GET['group'];?>;
+						var gdata = $('#memberList').serialize();
+						<?php session_start(); $_SESSION['group']=$_GET['group'];?>
+						//gdata[0] = $('#memberList').serialize();
+						//gdata[1] = <?php echo $_GET['group']; ?>;
+						$.ajax({
+							type		: "POST",
+							url			: "addmember.php",
+							data		: gdata,
+							async		: false
+						})
+						
+						.done(function() {
+							var url = "group.php?group=" + <?php echo "\"".$_SESSION['group']."\"";?>;
+							window.location.assign(url);
+						})
+						
+						.fail(function() {
+							var url = "group.php?group=" + <?php echo "\"".$_SESSION['group']."\"";?>;
+							window.location.assign(url);
 						});
 					});
-						
-				
-	
-					$('#addMember').on('click', function(e) {
-					var gdata = $('#memberList').serialize()
-					gdata['group'] = <?php echo $_GET['group']; ?>;
+					
+					$('.removemember').on('click', function(e) {
+						e.preventDefault();
+						var member = $($(e.target).parent()).find('#mem').html();//$(this).closest("#mem").html();
+						//var groupdata = {group : <?php echo $_GET['group']; ?>, member : member};
+						<?php session_start(); $_SESSION['group']=$_GET['group']; ?>;
 						$.ajax({
 							type		: "POST",
-							url		: "addmember.php",
-							data		:  gdata,
-							dataType	: 'json'
+							url			: "removemember.php",
+							data		:  {'member' : member}
 						})
-					});
-					
-				
-					$('.removeMember').on('click', function(e) {
-					var member = $(this).closest("#mem").html();
-					var groupdata = {group : <?php echo $_GET['group']; ?>, member : member};
-						$.ajax({
-							type		: "POST",
-							url		: "removemember.php",
-							data		:  groupdata,
-							dataType	: 'json'
-						})
-					
 						
+						.done(function() {
+							var url = "group.php?group=" + <?php echo "\"".$_SESSION['group']."\"";?>;
+							window.location.assign(url);
+						})
+						
+						.fail(function() {
+							var url = "group.php?group=" + <?php echo "\"".$_SESSION['group']."\"";?>;
+							window.location.assign(url);
+						});
 					});
 				});
+			});
 		</script>
 	</head>
 	<body>
 		<div id="accordian">
 			<ul>
 				<li>
-					<h3 id='home'>Home</h3>
+					<h3 id='homeElement'>Home</h3>
 					<script>
-						$('#home').on("click", function(e) {
+						$('#homeElement').on("click", function(e) {
 							window.location.href="HomePage.php";
 						});
+					</script>
+					<script>
+						setInterval(function() {
+							$.ajax({
+								url		: "count_messages.php",
+								dataType: "json"
+							})
+						
+							.done(function(data) {
+								if(!(data.mess_count == 0)) {
+									$('#mess_count').remove();
+									$('#homeElement').append("<div id='mess_count'> " + data.mess_count + "</div>");
+								}
+							});
+						}, 1000*60*5);
 					</script>
 				</li>
 				<li>
@@ -90,6 +125,9 @@
 				<li>
 					<h3 id="Groups">Groups</h3>
 					<ul id="GroupsList">
+						<!--<li><a href="#">School</a></li>
+						<li><a href="#">Work</a></li>
+						<li><a href="#">People</a></li>-->
 						<script>
 							jQuery(document).ready(function() {
 								jQuery("#Groups").on("click", function(e) {									
@@ -98,16 +136,17 @@
 										url			: 'get_groups.php',
 										dataType	: 'json'
 									})
-
+									
 									.done(function(result) {
 										jQuery('#GroupsList').empty();
-
+										
 										var counter=0;
 										jQuery.each(result, function(index, value) {
-											jQuery('#GroupsList').append(value.name);
+											//jQuery('#GroupsList').append("<li>" + value.name + "</li>");
+											jQuery('#GroupsList').append("<li><a href=\"group.php?group=" + value.name + "\">"+value.name+"</a></li>");
 										});
 									})
-
+									
 									.fail(function() {
 										jQuery('#GroupsList').empty();
 										jQuery('#GroupsList').append('Error loading groups.');
@@ -130,6 +169,17 @@
 					<script>
 						$('#requestpage').on("click", function() {
 							window.location.href="Request.php";
+						});
+					</script>
+					<script>
+						$.ajax({
+							url		: "count_requests.php",
+							dataType: "json"
+						})
+						
+						.done(function(data) {
+							if(!(data.count_requ == 0))
+								$('#requestpage').append("<div id='count_requ'> " + data.count_requ + "</div>");
 						});
 					</script>
 				</li>
@@ -164,12 +214,12 @@
 		
 
 				<script>
-					var data = {group : <?php echo $_GET['group']; ?>};
+					var data = {group : <?php $st = "'".$_GET['group']."'"; echo $st; ?>};
 					$.ajax({
-					url	: "loadgroup.php",
-					type	: "POST",
-					data	: data,
-					dataType: "json"
+						url		: "loadgroup.php",
+						type	: "POST",
+						data	: data,
+						dataType: "json"
 					})
 				
 					.done(function(response){
@@ -181,12 +231,12 @@
 				</script>
 				<p>Add Friends</p>
 				<form id="memberList">
-					<select class="friendlist" multiple>
-								
+					<select class="friendlist" multiple id="friendlist" name="friendlist[]">
 					</select>
 					<button id="addMember">Add</button>
-				
 				</form>
+				<br />
+				<br />
 			</div>
 		
 		</div>
