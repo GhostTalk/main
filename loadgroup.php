@@ -5,9 +5,9 @@
 	$conn = pg_connect("host=postgres.cise.ufl.edu user=cmoore dbname=ghosttalk password=calvin#1");
 	$user = $_SESSION['Username'];
 	
-	$query = sprintf("SELECT memberusername FROM groups WHERE name='%s' AND creatorUsername='%s'",
-		pg_escape_string($_POST['group']),
-		pg_escape_string($user));
+	$query = sprintf("SELECT username, firstname, lastname, picture FROM %s_groups WHERE name='%s'",
+		pg_escape_string($user),
+		pg_escape_string($_POST['group']));
 	
 	$result = pg_query($conn, $query);
 	
@@ -15,7 +15,7 @@
 	$counter = 0;
 	
 	while($row = pg_fetch_assoc($result)) {
-		$list[$counter] = "<div id="groupmember"><p id="mem">".$row['memberusername']."</p><button class"removemember">Remove</button></div>";
+		$list[$counter] = "<div class='groupmember' id='groupmember$counter'><img src='" . $row['picture'] . "' height='100px' width='100px' /><p id='name'>" . $row['firstname'] . " " . $row['lastname'] . "</p><p id='mem'>" . $row['username'] . "</p><button class='removemember'>Remove</button></div>";
 		$counter++;
 	}
 
