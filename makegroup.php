@@ -15,10 +15,7 @@
 				pg_escape_string($user),
 				pg_escape_string($friend[$counter]));
 				$result = pg_query($conn, $query);
-				
-			}
+		}
 		$counter++;
-	}
-			
-
+	}	
 ?>
