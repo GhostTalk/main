@@ -22,7 +22,7 @@
 		<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
 		<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 		<script>
-			setInterval(function() {
+			function getMessages(){
 				$.ajax({
 					url		: "inbox.php",
 					type	: "POST",
@@ -35,7 +35,11 @@
 						$('#tab1').append(value);
 					});
 				});
-			}, 1000*60*2);
+			}
+			
+			getMessages();
+			
+			setInterval(getMessages(), 1000*60*2);
 			
 			$.ajax({
 				url		: "loadlist.php",
