@@ -30,11 +30,26 @@
 		<div id="accordian">
 			<ul>
 				<li>
-					<h3 id='home'>Home</h3>
+					<h3 id='homeElement'>Home</h3>
 					<script>
-						$('#home').on("click", function(e) {
+						$('#homeElement').on("click", function(e) {
 							window.location.href="HomePage.php";
 						});
+					</script>
+					<script>
+						setInterval(function() {
+							$.ajax({
+								url		: "count_messages.php",
+								dataType: "json"
+							})
+						
+							.done(function(data) {
+								if(!(data.mess_count == 0)) {
+									$('#mess_count').remove();
+									$('#homeElement').append("<div id='mess_count'> " + data.mess_count + "</div>");
+								}
+							});
+						}, 1000*60*5);
 					</script>
 				</li>
 				<li>
@@ -48,6 +63,9 @@
 				<li>
 					<h3 id="Groups">Groups</h3>
 					<ul id="GroupsList">
+						<!--<li><a href="#">School</a></li>
+						<li><a href="#">Work</a></li>
+						<li><a href="#">People</a></li>-->
 						<script>
 							jQuery(document).ready(function() {
 								jQuery("#Groups").on("click", function(e) {									
@@ -62,7 +80,8 @@
 										
 										var counter=0;
 										jQuery.each(result, function(index, value) {
-											jQuery('#GroupsList').append(value.name);
+											//jQuery('#GroupsList').append("<li>" + value.name + "</li>");
+											jQuery('#GroupsList').append("<li><a href=\"group.php?group=" + value.name + "\">"+value.name+"</a></li>");
 										});
 									})
 									
@@ -76,13 +95,29 @@
 					</ul>
 				</li>
 				<li>
-					<h3>Search</h3>
+					<h3 id='searchpage'>Search</h3>
+					<script>
+						$('#searchpage').on("click", function() {
+							window.location.href="Search.php";
+						});
+					</script>
 				</li>
 				<li>
 					<h3 id='requestpage'>Requests</h3>
 					<script>
 						$('#requestpage').on("click", function() {
 							window.location.href="Request.php";
+						});
+					</script>
+					<script>
+						$.ajax({
+							url		: "count_requests.php",
+							dataType: "json"
+						})
+						
+						.done(function(data) {
+							if(!(data.count_requ == 0))
+								$('#requestpage').append("<div id='count_requ'> " + data.count_requ + "</div>");
 						});
 					</script>
 				</li>
