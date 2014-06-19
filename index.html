@@ -6,7 +6,8 @@
 	<script>
 $(document).ready(function(){
   $(".btn1").click(function(){
-    $(".btn1").fadeOut()
+    $(".btn1").fadeOut();
+    $("#butt").remove();
   });
   $(".btn1").click(function(){
     $("form").fadeIn(2500);
@@ -16,8 +17,8 @@ $(document).ready(function(){
 </head>
 <title>Sign in page</title>
 <body style="background:black">
-    <div id="top" style="width=100%; text-align:center">
-        <img src="http://i.imgur.com/ASTbZIp.png">
+    <div>
+        <center><img id="logo" src="http://i.imgur.com/ASTbZIp.png"></center>
     </div>
     <div id="buttons">
     	<div id="signup">
@@ -28,8 +29,8 @@ $(document).ready(function(){
                 <a href="#" class="btn1">Log In</a>
 		    </div>
 		    <form action="validate_login.php" method="post" style="display:none">
-			    <label for="Username" style="color:white">Username: </label> <input type="text" name="Username" id="Username" maxlength="15">
-			<label for="Password" style="color:white">Password: </label> <input type="password" name="Password" id="Password">
+			    <label for="Username" style="color:white; font-size:15px">Username </label> <input type="text" name="Username" id="Username" class="login" maxlength="15">
+			<label for="Password" style="color:white; font-size:15px;">Password </label> <input type="password" name="Password" id="Password" class="login">
 			<button type="Submit" name="Login">Login</button>
 			</div>
 		</form>
