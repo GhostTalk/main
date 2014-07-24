@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<meta charset="UTF-8">
+		<title>Krewe Captain Menu</title>
+		<meta name="description" content="This page will help our Krewe Captains spread the word about frank 2015 and help encourage social change.
+		<style type="text/css"></style>
+	</head>
+	<body>
+		<button id="register">Register</button><br />
+		<button id="play">Start Playlist</button><br />
+		<button id="send">Invite Others</button>
+		
+		<script>
+			$(document).ready(function() {
+				$("#register").click(function() {
+					var win = window.open('http://www.eventbrite.com', '_blank');
+					if(win) {
+						win.focus();
+					} else {
+						alert("Please disable popup blocker for this site.");
+					}
+				});
+
+				$('#play').click(function(e) {
+					var win = window.open(window.location.pathname, '_blank');
+					if(!win) {
+						alert("Please disable popup blocker for this site.");
+						return;
+					} else
+						window.location.href = 'frankplaylist.html', '_blank';
+				});
+				
+				$('#send').click(function() {
+					window.location.href = 'invite.php';
+				});
+			});
+		</script>
+	</body>
+</html>

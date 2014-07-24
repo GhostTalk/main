@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Sign in page</title>
+		<link rel='stylesheet' href='SignIn.css'/>
+		<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		<script>
+			$(document).ready(function(){
+				$(".btn1").click(function(){
+					$(".btn1").fadeOut();
+					$("#butt").remove();
+				});
+				$(".btn1").click(function(){
+					$("form").fadeIn(1000);
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<div>
+			<center><img id="logo" src="logo.gif"></center>
+		</div>
+		<div id="buttons">
+			<div id="login">
+				<div id="butt">
+					<a href="#" class="btn1">Log In</a>
+				</div>
+				<form id="loginform" style="display:none">
+					<div id="errormessage"></div>
+					<input type="hidden" name="timezone" id="timezone"/>
+					<label for="Username" style="color:white; font-size:15px">Username </label> <input type="text" name="Username" id="Username" class="login" maxlength="15">
+					<label for="Password" style="color:white; font-size:15px;">Password </label> <input type="password" name="Password" id="Password" class="login">
+					<button type="Submit" name="Login" class="btn2">Login</button>
+				</form>
+			</div>
+			<div id="signup">
+				<a href="signup.php">Sign Up</a>
+			</div>
+		</div>
+		<script>
+			$(document).ready(function() {
+				$('#timezone').val(String((new Date().getTimezoneOffset())/60));
+				
+				$("#loginform").submit(function(e) {
+					e.preventDefault();
+					
+					$('#errormessage').empty();
+					
+					$.ajax({
+						url		: "validate_login.php",
+						data	: $('#loginform').serialize(),
+						dataType: 'json',
+						type	: 'POST'
+					})
+					
+					.done(function(message) {
+						if(message == 'true')
+							window.location.replace("index.php");
+						else {
+							$('#errormessage').append("<p>"+message+"</p>");
+						}
+					})
+				});
+			});
+		</script>
+	</body>
+</html>

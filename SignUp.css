@@ -1,43 +1,84 @@
-#required{
-    margin-top:15%;
+body {
+	background-color: #0C090A;
 }
-td { 
-    font-family:Arial;
-    font-size:20px;
-    color:white;
-}
+
 button {
     position:relative;
-    margin-left:50%;
-    margin-bottom:15%
-}
-table {
-    width:150%;
-    border: solid white;
-    box-shadow: 
-		0 5px 10px 1px rgba(0, 0, 0, 0.6), 
-		0 0 200px 1px rgba(255, 255, 255, 5);
-}
-body {
- background-color: black;
-}
-label{
-display:inline-block;
-width:200px;
-margin-right:30px;
-text-align:right;
-color:white;
-font-family:Arial;
-}
-
-input{
-
+    margin: 15px auto;
+	margin-left:40%;
+	padding: 2px 15px;
+	border: solid 1px #004F72;
+	-webkit-border-radius: 15px;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+	font: 17px Helvetica, sans-serif;
+	font-weight: bold;
+	color: #ffffff;
+	background: #2f4f4f;
+	-webkit-box-shadow: 0px 0px 2px #bababa, inset 0px 0px 3px #ffffff;
+	-moz-box-shadow: 0px 0px 2px #bababa, inset 0px 0px 3px #ffffff;
+	box-shadow: 0px 0px 2px #bababa, inset 0px 0px 3px #ffffff;
 }
 
 fieldset{
-border:none;
-width:500px;
-margin:0px auto;
+	border:none;
+	width:500px;
+	margin:0px auto;
+}
+
+h1 {
+	margin-bottom: 5px;
+}
+
+* html a:hover {
+	background: transparent;
+}
+
+input{
+	border-radius: 10px;
+	text-indent: 3px;
+	margin-top:5px;
+}
+
+label{
+	display:inline-block;
+	width:200px;
+	margin-right:30px;
+	text-align:right;
+	color:white;
+	font-family:Helvetica;
+}
+
+select {
+	border-radius: 10px;
+}
+
+span.custom {
+	font-weight: normal;
+	text-align: left;
+}
+
+table {
+    width:600px;
+	border-radius: 20px;
+    border: solid white;
+	margin: 0px auto;
+	border: 2px solid white;
+	border-radius: 50px;
+	position: relative;
+	background-color: #0A0A2A;
+}
+
+td { 
+    font-family:Helvetica;
+    font-size:20px;
+    color:white;
+}
+
+.custom {
+	padding: 4px 2px 0px 10px;
+	font-size: 10px;
+	text-align: center;
 }
 
 .Error {
@@ -45,43 +86,86 @@ margin:0px auto;
     text-align:right;
     color:#FF0000;
     font-size:12px;
-}
-.fadein {
-    position:absolute;
-    top:33%;
-    left:10%;
-    margin:auto;
-}
-.fadein img {
-    position:absolute;
-    left:-10%;
-    top:10%;
-    -webkit-animation-name: fade;
-    -webkit-animation-iteration-count: infinite;
-    -webkit-animation-duration: 20s;
-    -moz-animation-name: fade;
-    -moz-animation-iteration-count: infinite;
-    -moz-animation-duration: 20s;
-    animation-name: fade;
-    animation-iteration-count: infinite;
-    animation-duration: 20s;
+	margin-left: 17px;
 }
 
-@-webkit-keyframes fade {
-    0% {opacity: 0;}
-    20% {opacity: 1;}
-    33% {opacity: 1;}
-    53% {opacity: 0;}
-    100% {opacity: 0;}
-}
-@keyframes fade {
-    0% {opacity: 0;}
-    20% {opacity: 1;}
-    33% {opacity: 1;}
-    53% {opacity: 0;}
-    100% {opacity: 0;}
+.grb {
+	width: auto;
+	font-size: 15px;
 }
 
-#f1 {
-    -webkit-animation-delay: -10s;
+.help {
+	background: #778899;
+	border: 2px solid #46505A;
+}
+
+.tooltip {
+	outline: none;
+	cursor: help;
+	text-decoration: none;
+	position: absolute;
+	margin-left: 490px;
+	margin-top: -30px;
+	font-size: 15px;
+	text-align: center;
+	background-color: #696969;
+	box-shadow: 0px 0px 5px 1px whitesmoke;
+	width: 20px;
+	border-radius: 20px;
+	color: white;
+}
+
+.tooltip:hover #tipspan {
+	display: inherit;
+	font-family: Helvetica;
+	left: -50px;
+	top: 25px;
+	z-index: 99;
+	margin-left: 0;
+	width: 200px;
+	border-radius: 5px 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
+	-webkit-box-shadow: 5px 5px rgba(0, 0, 0, 0.1);
+	-moz-box-shadow: 5px 5px rgba(0, 0, 0, 0.1);
+	opacity: 0.96;
+}
+
+.tooltip #tipspan {
+	display: none;
+	position: absolute;
+}
+
+.formitemstt {
+	margin-left: -30px;
+	margin-top: 20px;
+	width: 15px;
+	height: 15px;
+	font-size: 12px;
+}
+
+#formimage {
+	margin-right: 25px;
+}
+
+#genderErr {
+	margin-left: -15px;
+}
+
+#logo {
+	width: 75%;
+	margin-bottom: 20px;
+}
+
+#question2 {
+	width: 330px;
+}
+
+#q1tooltip, #q2tooltip {
+	margin-top: 5px;
+}
+
+#Username{
+	margin-top: 20px;
 }

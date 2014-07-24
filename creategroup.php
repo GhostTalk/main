@@ -3,7 +3,7 @@
 <?php
 	session_start();
 	if(!isset($_SESSION['Username'])) {
-		echo '<script>window.location.href="http://cise.ufl.edu/~cmoore";</script>';
+		echo '<script>window.location.href="login.html";</script>';
 		exit();
 	}
 ?>
@@ -11,7 +11,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<link rel='stylesheet' href='Request.css'/>
+		<link rel='stylesheet' href='creategroup.css'/>
 		<script src="http://thecodeplayer.com/uploads/js/prefixfree-1.0.7.js" type="text/javascript" type="text/javascript"></script>
 		<script src="http://thecodeplayer.com/uploads/js/jquery-1.7.1.min.js" type="text/javascript"></script>
 		
@@ -68,7 +68,7 @@
 					<h3 id='homeElement'>Home</h3>
 					<script>
 						$('#homeElement').on("click", function(e) {
-							window.location.href="HomePage.php";
+							window.location.href="http://www.cise.ufl.edu/~cmoore";
 						});
 					</script>
 					<script>
@@ -172,7 +172,7 @@
 								url	: 'logout.php'
 							})
 							.done(function() {
-								window.location.href="http://www.cise.ufl.edu/~cmoore";
+								window.location.href="http://www.cise.ufl.edu/~cmoore/login.html";
 							});
 						});
 					</script>

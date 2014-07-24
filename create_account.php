@@ -26,16 +26,8 @@
 	$bdate = $_POST['dob_year'] . '-' . $_POST['dob_month'] . '-' . $_POST['dob_day'];
 
 	if(!isset($_POST['City'])) {
-		$createuser = sprintf("INSERT INTO GTUser(username, password, firstName, lastName, email, gender, bdate) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s');",
-			pg_escape_string($_POST['Username']),
-			pg_escape_string($password),
-			pg_escape_string($_POST['First']),
-			pg_escape_string($_POST['Last']),
-			pg_escape_string($_POST['Email']),
-			pg_escape_string($_POST['gender']),
-			pg_escape_string($bdate));
-	} else {
-		$createuser = sprintf("INSERT INTO GTUser(username, password, firstName, lastName, email, gender, bdate, currentCity) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');",
+		$createuser = sprintf("INSERT INTO GTUser(username, password, firstName, lastName, email, gender, bdate) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s');
+		INSERT INTO Security(username, question1, answer1, question2, answer2) VALUES ('%s', '%s', '%s', '%s', '%s');",
 			pg_escape_string($_POST['Username']),
 			pg_escape_string($password),
 			pg_escape_string($_POST['First']),
@@ -43,7 +35,27 @@
 			pg_escape_string($_POST['Email']),
 			pg_escape_string($_POST['gender']),
 			pg_escape_string($bdate),
-			pg_escape_string($_POST['City']));
+			pg_escape_string($_POST['Username']),
+			pg_escape_string($_POST['question1']),
+			pg_escape_string($_POST['answer1']),
+			pg_escape_string($_POST['question2']),
+			pg_escape_string($_POST['answer2']));
+	} else {
+		$createuser = sprintf("INSERT INTO GTUser(username, password, firstName, lastName, email, gender, bdate, currentCity) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');
+		INSERT INTO Security(username, question1, answer1, question2, answer2) VALUES ('%s', '%s', '%s', '%s', '%s');",
+			pg_escape_string($_POST['Username']),
+			pg_escape_string($password),
+			pg_escape_string($_POST['First']),
+			pg_escape_string($_POST['Last']),
+			pg_escape_string($_POST['Email']),
+			pg_escape_string($_POST['gender']),
+			pg_escape_string($bdate),
+			pg_escape_string($_POST['City']),
+			pg_escape_string($_POST['Username']),
+			pg_escape_string($_POST['question1']),
+			pg_escape_string($_POST['answer1']),
+			pg_escape_string($_POST['question2']),
+			pg_escape_string($_POST['answer2']));
 	}
 	
 	$conn = pg_connect('host=postgres.cise.ufl.edu user=cmoore password=calvin#1 dbname=ghosttalk');

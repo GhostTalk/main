@@ -1,10 +1,13 @@
 #!/usr/local/bin/php
 
 <?php
-	function validate_email($email) {
+	$contents = file_get_contents('kwLGY7rgDt9IiLtLe36Q0iA2YpDiNiuM5hoYiX9lpvmnGSFbTyG49I5wbLovydcGFD11seSetnzUuBhb.txt');
+	$jsond = json_decode($contents, true);
+	$conn = pg_connect('host='.$jsond['database']['host'].' user='.$jsond['database']['user'].' password='.$jsond['database']['password'].' dbname='.$jsond['database']['dbname']);
+	
+	function validate_email($email, $conn) {
 		$query = sprintf("SELECT email FROM GTUser WHERE email='%s'",
 			pg_escape_string($email));
-		$conn = pg_connect('host=postgres.cise.ufl.edu user=cmoore password=calvin#1 dbname=ghosttalk');
 
 		$result = pg_query($conn, $query);
 
@@ -14,10 +17,9 @@
 			return true;
 	}
 	
-	function validate_username($username) {
+	function validate_username($username, $conn) {
 		$query = sprintf("SELECT username FROM GTUser WHERE username ILIKE '%s'",
 			pg_escape_string($_POST['Username']));
-		$conn = pg_connect('host=postgres.cise.ufl.edu user=cmoore password=calvin#1 dbname=ghosttalk');
 
 		$result = pg_query($conn, $query);
 
@@ -36,7 +38,7 @@
 	if(!empty($_POST['Username'])) {
 		$username = $_POST['Username'];
 	} else {
-		$errors['Username'] = '*Username required.';
+		$errors['Username'] = 'Username required.';
 		$err = true;
 	}
 
@@ -56,28 +58,48 @@
 	if(!empty($_POST['Email'])) {
 		$email = $_POST['Email'];
 	} else {
-		$errors['Email'] = '*Email required.';
+		$errors['Email'] = 'Email required.';
 		$err = true;
 	}
 
 	if(!empty($_POST['First'])) {
 		$first = $_POST['First'];
 	} else {
-		$errors['First'] = '*Full name required.';
+		$errors['First'] = 'Full name required.';
 		$err = true;
 	}
 
 	if(!empty($_POST['Last'])) {
 		$last = $_POST['Last'];
 	} else {
-		$errors['Last'] = '*Full name required.';
+		$errors['Last'] = 'Full name required.';
 		$err = true;
 	}
 
 	if(!empty($_POST['gender'])) {
 		$gender = $_POST['gender'];
 	} else {
-		$errors['gender'] = '*Gender is required';
+		$errors['gender'] = 'Gender is required';
+		$err = true;
+	}
+	
+	if(empty($_POST['dob_month']) || empty($_POST['dob_day']) || empty($_POST['dob_year'])) {
+		$errors['dob'] = 'Birthdate is required.';
+		$err = true;
+	}
+	
+	if(empty($_POST['answer1'])) {
+		$errors['answer1'] = 'An answer to the security question is required.';
+		$err = true;
+	}
+	
+	if(empty($_POST['question2'])) {
+		$errors['question2'] = 'A second security question is required.';
+		$err = true;
+	}
+	
+	if(empty($_POST['answer2'])) {
+		$errors['answer2'] = 'An answer to the security question is required.';
 		$err = true;
 	}
 
@@ -87,7 +109,7 @@
 		$err = true;
 	}
 	
-	if(!validate_username($username) && !empty($_POST['Username'])) {
+	if(!validate_username($username, $conn) && !empty($_POST['Username'])) {
 		$errors['Username'] = 'This username is already taken.';
 		$err = true;
 	}
@@ -98,7 +120,7 @@
 		$err = true;
 	}
 	
-	if(!validate_email($email) && !empty($_POST['Email'])) {
+	if(!validate_email($email, $conn) && !empty($_POST['Email'])) {
 		$errors['Email'] = 'This email is already in use.';
 		$err = true;
 	}
@@ -120,6 +142,15 @@
 		$errors['Last'] = 'A valid last name is required';
 		$err = true;
 	}
+	
+	//Check the reCAPTCHA response.
+	require_once('recaptcha/recaptchalib.php');
+	$privatekey = $jsond['recaptcha_private_key'];
+	$result = recaptcha_check_answer($privatekey, $_SERVER['REMOTE_ADDR'], $_POST['recaptcha_challenge_field'], $_POST['recaptcha_response_field']);
+	if(!$result->is_valid) {
+		$errors['reCAPTCHA'] = "The characters you entered did not match the word verification.  Please try again.";
+		$err = true;
+	}
 
 	if($err){
 		$data['success'] = false;
@@ -133,4 +164,3 @@
 
 	echo json_encode($data);
 ?>
-	
